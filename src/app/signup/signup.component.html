@@ -69,24 +69,22 @@
 
     <mat-label>Confirm Password</mat-label>
 
-    <input matInput [ngClass]='confirmPasswordClass'
-           #cpw (keyup)='checkPasswords(pw.value, cpw.value)'
-           formControlName="confirmPassword" required type="password"
+    <input matInput [ngClass]='confirmPasswordClass' formControlName="confirmPassword" required type="password"
            [type]="confirmPassowrd?'password':'text'">
     <button type="button" mat-icon-button matSuffix (click)="confirmPassowrd = !confirmPassowrd"
             [attr.aria-label]="'Hide password'"
             [attr.aria-pressed]="'password'">
       <mat-icon>{{confirmPassowrd?'visibility_off':'visibility'}}</mat-icon>
     </button>
-    <mat-error *ngIf="signUpForm.controls.confirmPassword.touched && signUpForm.controls.confirmPassword.invalid">
-      <small  *ngIf="signUpForm.controls.confirmPassword.errors?.['required']">This field is requered</small>
-      <small *ngIf='!passwordsMatching && isConfirmPasswordDirty'>New password & confirm password does not match</small>
 
+    <mat-error *ngIf="signUpForm.get('confirmPassword').touched && signUpForm.get('confirmPassword').invalid">
+      <small *ngIf="signUpForm.get('confirmPassword').hasError('required')">Password confirmation is required!</small>
+      <small *ngIf="signUpForm.get('confirmPassword').hasError('not_matching') && signUpForm.get('confirmPassword').touched && signUpForm.get('confirmPassword').invalid
+&& signUpForm.get('confirmPassword').dirty">The password doesn't match!</small>
     </mat-error>
   </mat-form-field>
 
 </div>
-
 
 
  </form>

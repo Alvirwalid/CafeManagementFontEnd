@@ -1,10 +1,12 @@
 import {Component, OnInit} from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {AbstractControl, FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {UserService} from "../../service/user.service";
 import {SnakbarService} from "../../service/snakbar.service";
 import {MatDialogRef} from "@angular/material/dialog";
 import {NgxUiLoaderService} from "ngx-ui-loader";
 import {GlobalConstant} from "../share/global_constant";
+import {CustomValidators} from "./validatior";
+
 
 @Component({
   selector: 'app-signup',
@@ -17,7 +19,7 @@ export class SignupComponent implements OnInit{
   confirmPassowrd=true;
   signUpForm:any=FormGroup;
   responseMessage:any
-  passwordsMatching = false;
+  passwordsMatching = true;
   isConfirmPasswordDirty = false;
   confirmPasswordClass = 'form-control';
 
@@ -37,8 +39,27 @@ export class SignupComponent implements OnInit{
       contactNumber:[null,[Validators.required,Validators.pattern(GlobalConstant.contactNumberRegex)]],
       password:[null,[Validators.required,]],
       confirmPassword:[null,[Validators.required]]
-    })
+    },
+      { validator: CustomValidators.MatchingPasswords}
+
+    )
   }
+
+  passwordMatchValidator(form: FormGroup) {
+    const password = form.get('password');
+    const confirmPassword = form.get('confirmPassword');
+
+    if (password && confirmPassword && password.value !== confirmPassword.value) {
+
+      confirmPassword.setErrors({ mismatch: true });
+    } else {
+
+      // @ts-ignore
+      confirmPassword.setErrors(null);
+    }
+  }
+
+
 
   validateSubmit(){
     if(this.signUpForm.controls('password').value != this.signUpForm.controls('confirmPassword').value){
@@ -84,12 +105,18 @@ export class SignupComponent implements OnInit{
     if (pw==cpw) {
 
       console.log('match')
-      this.passwordsMatching = true;
+      this.passwordsMatching = false;
       this.confirmPasswordClass = 'form-control is-valid';
+
+      console.log('passwordsMatching '+this.passwordsMatching);
+      console.log('confirmPasswordClass'+this.confirmPasswordClass);
     } else {
       console.log('dont match')
-      this.passwordsMatching = false;
+      this.passwordsMatching = true;
       this.confirmPasswordClass = 'form-control is-invalid';
+
+      console.log('passwordsMatching '+this.passwordsMatching);
+      console.log('confirmPasswordClass'+this.confirmPasswordClass);
     }
   }
 
