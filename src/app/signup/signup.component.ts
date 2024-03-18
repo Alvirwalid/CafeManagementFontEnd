@@ -18,6 +18,7 @@ export class SignupComponent implements OnInit{
 
   password=true;
   confirmPassowrd=true;
+  isAdmin:boolean=false;
   signUpForm:any=FormGroup;
   responseMessage:any
   confirmPasswordClass = 'form-control';
@@ -61,6 +62,30 @@ export class SignupComponent implements OnInit{
 
 
 
+  isChecked(){
+
+  if(this.isAdmin){
+
+    this.isAdmin=false;
+    console.log(this.isAdmin)
+  }else {
+    this.isAdmin=true;
+    console.log(this.isAdmin)
+  }
+
+
+    var formData=this.signUpForm.value;
+    var data ={
+      name:formData.name,
+      username:formData.email,
+      contactNumber:formData.contactNumber,
+      password:formData.password,
+      role: this.isAdmin?'admin':'user'
+    }
+
+    console.log(data);
+}
+
   handleSubmit(){
     this.ngxService.start();
     var formData=this.signUpForm.value;
@@ -69,7 +94,7 @@ export class SignupComponent implements OnInit{
       username:formData.email,
       contactNumber:formData.contactNumber,
       password:formData.password,
-      role:'admin'
+      role: this.isAdmin?'admin':'user'
     }
 
     console.log(data);
