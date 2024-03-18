@@ -1,11 +1,12 @@
 import {Component, OnInit} from '@angular/core';
-import {AbstractControl, FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {UserService} from "../../service/user.service";
 import {SnakbarService} from "../../service/snakbar.service";
 import {MatDialogRef} from "@angular/material/dialog";
 import {NgxUiLoaderService} from "ngx-ui-loader";
 import {GlobalConstant} from "../share/global_constant";
 import {CustomValidators} from "./validatior";
+import {error} from "@angular/compiler-cli/src/transformers/util";
 
 
 @Component({
@@ -19,8 +20,6 @@ export class SignupComponent implements OnInit{
   confirmPassowrd=true;
   signUpForm:any=FormGroup;
   responseMessage:any
-  passwordsMatching = true;
-  isConfirmPasswordDirty = false;
   confirmPasswordClass = 'form-control';
 
   constructor(
@@ -61,63 +60,81 @@ export class SignupComponent implements OnInit{
 
 
 
-  validateSubmit(){
-    if(this.signUpForm.controls('password').value != this.signUpForm.controls('confirmPassword').value){
-      return  true;
-    }else {
-      return false
-    }
-  }
+
   handleSubmit(){
     this.ngxService.start();
     var formData=this.signUpForm.value;
     var data ={
       name:formData.name,
-      email:formData.email,
+      username:formData.email,
       contactNumber:formData.contactNumber,
-      password:formData.password
+      password:formData.password,
+      role:'admin'
     }
 
-    this.userService.signUp(data).subscribe((response:any)=>{
-      this.ngxService.stop();
-      this.dialogRef.close();
-      this.responseMessage=response.message;
-      this.snackbarService.openSnakbar(this.responseMessage,"")
-    },
-    (error)=>{
-      this.ngxService.stop();
-      if(error.error.message){
-        this.responseMessage=error.error.message;
-      }else {
-        this.responseMessage =GlobalConstant.genericError;
+    console.log(data);
+
+    this.userService.signUp(data).subscribe(
+
+      {
+
+        next:(res)=>{
+            console.log('Response : '+res.message);
+            console.log('Response : '+res.messageBn);
+            this.ngxService.stop();
+            this.dialogRef.close();
+            this.responseMessage=res.message;
+            this.snackbarService.openSnakbar(this.responseMessage,"")
+
+        },
+        error:(error)=>{
+            this.ngxService.stop();
+            if(error.error.message){
+              this.responseMessage=error.error.message;
+            }else {
+              this.responseMessage =GlobalConstant.genericError;
+            }
+
+            this.snackbarService.openSnakbar(this.responseMessage,GlobalConstant.error)
+        }
+
+
+        // (error)=>{
+        //   this.ngxService.stop();
+        //   if(error.error.message){
+        //     this.responseMessage=error.error.message;
+        //   }else {
+        //     this.responseMessage =GlobalConstant.genericError;
+        //   }
+        //
+        //   this.snackbarService.openSnakbar(this.responseMessage,GlobalConstant.error)
+        // }
       }
+    //   (response:any)=>{
+    //
+    //   console.log('Response : '+response.data);
+    //   this.ngxService.stop();
+    //   this.dialogRef.close();
+    //   this.responseMessage=response.message;
+    //   this.snackbarService.openSnakbar(this.responseMessage,"")
+    // },
+    // (error)=>{
+    //   this.ngxService.stop();
+    //   if(error.error.message){
+    //     this.responseMessage=error.error.message;
+    //   }else {
+    //     this.responseMessage =GlobalConstant.genericError;
+    //   }
+    //
+    //   this.snackbarService.openSnakbar(this.responseMessage,GlobalConstant.error)
+    // }
 
-      this.snackbarService.openSnakbar(this.responseMessage,GlobalConstant.error)
-    });
+
+    );
+
+
+
   }
-  checkPasswords(pw: string, cpw: string) {
-    this.isConfirmPasswordDirty = true;
 
-    var  m=pw==cpw?true:false;
-    console.log(m)
-
-    console.log(pw,cpw)
-    if (pw==cpw) {
-
-      console.log('match')
-      this.passwordsMatching = false;
-      this.confirmPasswordClass = 'form-control is-valid';
-
-      console.log('passwordsMatching '+this.passwordsMatching);
-      console.log('confirmPasswordClass'+this.confirmPasswordClass);
-    } else {
-      console.log('dont match')
-      this.passwordsMatching = true;
-      this.confirmPasswordClass = 'form-control is-invalid';
-
-      console.log('passwordsMatching '+this.passwordsMatching);
-      console.log('confirmPasswordClass'+this.confirmPasswordClass);
-    }
-  }
 
 }

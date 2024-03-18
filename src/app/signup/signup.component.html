@@ -11,7 +11,7 @@
 
 
 <mat-dialog-content>
- <form [formGroup]="signUpForm">
+ <form [formGroup]="signUpForm" (ngSubmit)="handleSubmit()">
 
 
 <div fxFlex fxLayout="column">
@@ -83,6 +83,10 @@
 && signUpForm.get('confirmPassword').dirty">The password doesn't match!</small>
     </mat-error>
   </mat-form-field>
+
+  <button mat-raised-button color="primary" [disabled]="signUpForm.invalid">Primary</button>
+
+
 
 </div>
 
