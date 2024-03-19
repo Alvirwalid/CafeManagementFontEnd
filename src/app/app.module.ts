@@ -18,6 +18,8 @@ import { BestSallerComponent } from './best-saller/best-saller.component';
 import {HttpClientModule} from "@angular/common/http";
 import { SignupComponent } from './signup/signup.component';
 import {NgxUiLoaderConfig, NgxUiLoaderModule, SPINNER} from "ngx-ui-loader";
+import { ForgotpasswordComponent } from './forgotpassword/forgotpassword.component';
+import { LoginComponent } from './login/login.component';
 
 
 const ngxUiLoaderConfig:NgxUiLoaderConfig={
@@ -43,6 +45,8 @@ const ngxUiLoaderConfig:NgxUiLoaderConfig={
     // DashboardComponent,
     BestSallerComponent,
     SignupComponent,
+    ForgotpasswordComponent,
+    LoginComponent,
 
 
   ],

@@ -21,4 +21,17 @@ export class UserService {
       headers:new  HttpHeaders().set("Content-Type","application/json")
     })
   }
+
+  forgotPassword(data:any):Observable<CommonResponseObject<any>>{
+    // @ts-ignore
+    return this.httpClient.post(this.url+'/user/forgotPassword',
+      data,{headers:new  HttpHeaders().set("Content-Type","application/json")})
+  }
+
+  login(data:any):Observable<CommonResponseObject<any>>{
+    // @ts-ignore
+    return this.httpClient.post(this.url+'/login',data,{
+      headers: new HttpHeaders().set("Content-Type","application/json")
+    })
+  }
 }

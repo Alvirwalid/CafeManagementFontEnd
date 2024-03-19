@@ -1,7 +1,6 @@
-import {AbstractControl} from "@angular/forms";
+import {AbstractControl, ValidationErrors, ValidatorFn} from "@angular/forms";
 
 export class CustomValidators {
-
   static MatchingPasswords(control: AbstractControl) {
     const password = control.get('password')?.value;
     const confirmPassword = control.get('confirmPassword')?.value;
@@ -17,6 +16,11 @@ export class CustomValidators {
   }
 }
 
+
+
+
 function compare(password: string,confirmPassword: string) {
   return password !== confirmPassword && confirmPassword !== ''
 }
+
+

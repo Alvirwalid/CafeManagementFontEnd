@@ -66,7 +66,11 @@ body {
 //
 /* Footer */
 .footer {
-  padding: 6px;
+
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  //padding: 6px;
   text-align: center;
   color: white;
   background: #7b1fa2;
@@ -174,7 +178,7 @@ a {
 
 @media (max-width: 768px) {
   a.logo {
-    margin: 1.5em;
+    //margin: 1.5em;
   }
 
   ul {

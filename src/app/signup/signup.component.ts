@@ -1,14 +1,12 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {UserService} from "../../service/user.service";
-import {SnakbarService} from "../../service/snakbar.service";
+import {SnackbarService} from "../../service/snackbar.service";
 import {MatDialogRef} from "@angular/material/dialog";
 import {NgxUiLoaderService} from "ngx-ui-loader";
 import {GlobalConstant} from "../share/global_constant";
 import {CustomValidators} from "./validatior";
-import {error} from "@angular/compiler-cli/src/transformers/util";
-
-
+import {CommonResponseObject} from "../model/common_response";
 @Component({
   selector: 'app-signup',
   templateUrl: './signup.component.html',
@@ -21,17 +19,14 @@ export class SignupComponent implements OnInit{
   isAdmin:boolean=false;
   signUpForm:any=FormGroup;
   responseMessage:any
-  confirmPasswordClass = 'form-control';
-
   constructor(
     private  formBuilder:FormBuilder,
     private  userService:UserService,
-    private snackbarService:SnakbarService,
+    private snackbarService:SnackbarService,
     private dialogRef:MatDialogRef<SignupComponent>,
     private ngxService:NgxUiLoaderService
               ) {
   }
-
   ngOnInit(): void {
     this.signUpForm = this.formBuilder.group({
       name:[null,[Validators.required,Validators.pattern(GlobalConstant.nameRegex)]],
@@ -44,26 +39,7 @@ export class SignupComponent implements OnInit{
 
     )
   }
-
-  passwordMatchValidator(form: FormGroup) {
-    const password = form.get('password');
-    const confirmPassword = form.get('confirmPassword');
-
-    if (password && confirmPassword && password.value !== confirmPassword.value) {
-
-      confirmPassword.setErrors({ mismatch: true });
-    } else {
-
-      // @ts-ignore
-      confirmPassword.setErrors(null);
-    }
-  }
-
-
-
-
   isChecked(){
-
   if(this.isAdmin){
 
     this.isAdmin=false;
@@ -86,6 +62,14 @@ export class SignupComponent implements OnInit{
     console.log(data);
 }
 
+validator():boolean{
+    if(this.signUpForm.get('password').value != this.signUpForm.get('confirmPassword').value){
+      return true;
+    }else {
+
+      return  false;
+    }
+}
   handleSubmit(){
     this.ngxService.start();
     var formData=this.signUpForm.value;
@@ -112,52 +96,20 @@ export class SignupComponent implements OnInit{
             this.snackbarService.openSnakbar(this.responseMessage,"")
 
         },
-        error:(error)=>{
+        error:(error:CommonResponseObject<any>)=>{
             this.ngxService.stop();
-            if(error.error.message){
-              this.responseMessage=error.error.message;
-            }else {
-              this.responseMessage =GlobalConstant.genericError;
-            }
+            // if(error.error.message){
+            //   this.responseMessage=error.error.message;
+            // }else {
+            //   this.responseMessage =GlobalConstant.genericError;
+            // }
 
-            this.snackbarService.openSnakbar(this.responseMessage,GlobalConstant.error)
+            this.snackbarService.openSnakbar(error.message,GlobalConstant.error)
         }
 
-
-        // (error)=>{
-        //   this.ngxService.stop();
-        //   if(error.error.message){
-        //     this.responseMessage=error.error.message;
-        //   }else {
-        //     this.responseMessage =GlobalConstant.genericError;
-        //   }
-        //
-        //   this.snackbarService.openSnakbar(this.responseMessage,GlobalConstant.error)
-        // }
       }
-    //   (response:any)=>{
-    //
-    //   console.log('Response : '+response.data);
-    //   this.ngxService.stop();
-    //   this.dialogRef.close();
-    //   this.responseMessage=response.message;
-    //   this.snackbarService.openSnakbar(this.responseMessage,"")
-    // },
-    // (error)=>{
-    //   this.ngxService.stop();
-    //   if(error.error.message){
-    //     this.responseMessage=error.error.message;
-    //   }else {
-    //     this.responseMessage =GlobalConstant.genericError;
-    //   }
-    //
-    //   this.snackbarService.openSnakbar(this.responseMessage,GlobalConstant.error)
-    // }
-
 
     );
-
-
 
   }
 

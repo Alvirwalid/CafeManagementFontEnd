@@ -1,4 +1,4 @@
-<mat-toolbar color="primary">
+<mat-toolbar >
   <mat-toolbar-row fxLayout="row">
     <span>Signup</span>
 
@@ -11,7 +11,7 @@
 
 
 <mat-dialog-content>
- <form [formGroup]="signUpForm" (ngSubmit)="handleSubmit()">
+ <form [formGroup]="signUpForm" >
 
 
 <div fxFlex fxLayout="column">
@@ -62,14 +62,11 @@
 <!--      <small  *ngIf="signUpForm.controls.password.errors?.['pattern']">This field is invalid</small>-->
     </mat-error>
   </mat-form-field>
-
-
-
   <mat-form-field fxFlex appearance="outline">
 
     <mat-label>Confirm Password</mat-label>
 
-    <input matInput [ngClass]='confirmPasswordClass' formControlName="confirmPassword" required type="password"
+    <input matInput  formControlName="confirmPassword" required type="password"
            [type]="confirmPassowrd?'password':'text'">
     <button type="button" mat-icon-button matSuffix (click)="confirmPassowrd = !confirmPassowrd"
             [attr.aria-label]="'Hide password'"
@@ -83,21 +80,16 @@
 && signUpForm.get('confirmPassword').dirty">The password doesn't match!</small>
     </mat-error>
   </mat-form-field>
-
   <mat-checkbox (change)="isChecked()">Are you admin or User ?</mat-checkbox>
 
-
-
-
-
-
-  <button mat-raised-button color="primary" [disabled]="signUpForm.invalid">Primary</button>
-
-
+<!--  <button mat-raised-button color="primary" [disabled]="signUpForm.invalid">Primary</button>-->
 
 </div>
-
-
  </form>
-
 </mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button  mat-raised-button color="primary" (click)="handleSubmit()"  [disabled]="validator() || !(signUpForm.valid && signUpForm.dirty)"><mat-icon>save</mat-icon>Save</button>
+<button  mat-raised-button mat-dialog-close color="warn"><mat-icon>close</mat-icon>Cancel</button>
+</mat-dialog-actions>
+

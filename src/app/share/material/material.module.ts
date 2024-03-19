@@ -5,7 +5,7 @@ import {MatButtonModule} from "@angular/material/button";
 import {MatBottomSheetModule} from "@angular/material/bottom-sheet";
 import {MatButtonToggleModule} from "@angular/material/button-toggle";
 import {MatCardModule} from "@angular/material/card";
-import {MatCheckbox, MatCheckboxModule} from "@angular/material/checkbox";
+import {MatCheckboxModule} from "@angular/material/checkbox";
 import {MatChipsModule} from "@angular/material/chips";
 import {MatTableModule} from "@angular/material/table";
 import {MatDatepickerModule} from "@angular/material/datepicker";
