@@ -7,6 +7,7 @@ import {NgxUiLoaderService} from "ngx-ui-loader";
 import {GlobalConstant} from "../share/global_constant";
 import {CustomValidators} from "./validatior";
 import {CommonResponseObject} from "../model/common_response";
+import {SignUpService} from "../../service/sign-up.service";
 @Component({
   selector: 'app-signup',
   templateUrl: './signup.component.html',
@@ -24,7 +25,8 @@ export class SignupComponent implements OnInit{
     private  userService:UserService,
     private snackbarService:SnackbarService,
     private dialogRef:MatDialogRef<SignupComponent>,
-    private ngxService:NgxUiLoaderService
+    private ngxService:NgxUiLoaderService,
+    private service:SignUpService
               ) {
   }
   ngOnInit(): void {
@@ -33,34 +35,35 @@ export class SignupComponent implements OnInit{
       email:[null,[Validators.required,Validators.pattern(GlobalConstant.emailRegex)]],
       contactNumber:[null,[Validators.required,Validators.pattern(GlobalConstant.contactNumberRegex)]],
       password:[null,[Validators.required,]],
-      confirmPassword:[null,[Validators.required]]
+      confirmPassword:[null,[Validators.required]],
+      role:[null,Validators.required]
     },
       { validator: CustomValidators.MatchingPasswords}
 
     )
   }
-  isChecked(){
-  if(this.isAdmin){
-
-    this.isAdmin=false;
-    console.log(this.isAdmin)
-  }else {
-    this.isAdmin=true;
-    console.log(this.isAdmin)
-  }
-
-
-    var formData=this.signUpForm.value;
-    var data ={
-      name:formData.name,
-      username:formData.email,
-      contactNumber:formData.contactNumber,
-      password:formData.password,
-      role: this.isAdmin?'admin':'user'
-    }
-
-    console.log(data);
-}
+//   isChecked(){
+//   if(this.isAdmin){
+//
+//     this.isAdmin=false;
+//     console.log(this.isAdmin)
+//   }else {
+//     this.isAdmin=true;
+//     console.log(this.isAdmin)
+//   }
+//
+//
+//     var formData=this.signUpForm.value;
+//     var data ={
+//       name:formData.name,
+//       username:formData.email,
+//       contactNumber:formData.contactNumber,
+//       password:formData.password,
+//       role: this.isAdmin?'admin':'user'
+//     }
+//
+//     console.log(data);
+// }
 
 validator():boolean{
     if(this.signUpForm.get('password').value != this.signUpForm.get('confirmPassword').value){
@@ -81,15 +84,16 @@ validator():boolean{
       role: this.isAdmin?'admin':'user'
     }
 
-    console.log(data);
+    // console.log(data);
 
-    this.userService.signUp(data).subscribe(
+    this.service.signUp(data).subscribe(
 
       {
 
         next:(res)=>{
             console.log('Response : '+res.message);
-            console.log('Response : '+res.messageBn);
+            console.log('Response : '+res.status);
+            console.log('Response : '+res.data.username);
             this.ngxService.stop();
             this.dialogRef.close();
             this.responseMessage=res.message;

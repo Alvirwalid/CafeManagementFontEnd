@@ -80,10 +80,10 @@
 && signUpForm.get('confirmPassword').dirty">The password doesn't match!</small>
     </mat-error>
   </mat-form-field>
-  <mat-checkbox (change)="isChecked()">Are you admin or User ?</mat-checkbox>
-
-<!--  <button mat-raised-button color="primary" [disabled]="signUpForm.invalid">Primary</button>-->
-
+  <mat-radio-group aria-label="Select an option" formControlName="role" required>
+    <mat-radio-button value="admin">Admin</mat-radio-button>
+    <mat-radio-button value="user" checked="true">User</mat-radio-button>
+  </mat-radio-group>
 </div>
  </form>
 </mat-dialog-content>
