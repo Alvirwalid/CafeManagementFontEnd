@@ -1,8 +1,10 @@
-import { Component } from '@angular/core';
+import {Component, Inject, Injectable} from '@angular/core';
 import {MatDialog, MatDialogConfig} from "@angular/material/dialog";
 import {SignupComponent} from "../signup/signup.component";
 import {ForgotpasswordComponent} from "../forgotpassword/forgotpassword.component";
 import {LoginComponent} from "../login/login.component";
+import {LoginService} from "../../service/login.service";
+import {Route, Router} from "@angular/router";
 
 @Component({
   selector: 'app-home',
@@ -13,6 +15,8 @@ export class HomeComponent {
 
 
   token='';
+
+  private loginService=Inject(LoginComponent)
   constructor(private  dialog:MatDialog) {
   }
 
@@ -36,6 +40,11 @@ export class HomeComponent {
    getToken(){
     this.token=localStorage.getItem('token')??'No token found'
   }
+  // logout(): void {
+  //   this.loginService.logout();
+  //   this.route.navigate(['/login']);
+  // }
+
 
 
 }

@@ -8,6 +8,7 @@ import {GlobalConstant} from "../share/global_constant";
 import {CustomValidators} from "./validatior";
 import {CommonResponseObject} from "../model/common_response";
 import {SignUpService} from "../../service/sign-up.service";
+import {UserModel} from "../model/userModel";
 @Component({
   selector: 'app-signup',
   templateUrl: './signup.component.html',
@@ -97,18 +98,18 @@ validator():boolean{
             this.ngxService.stop();
             this.dialogRef.close();
             this.responseMessage=res.message;
-            this.snackbarService.openSnakbar(this.responseMessage,"")
+            this.snackbarService.openSnakbar(res.message,"")
 
         },
-        error:(error:CommonResponseObject<any>)=>{
+        error:(error)=>{
+          const customError: CommonResponseObject<any> = error.error as CommonResponseObject<any>;
             this.ngxService.stop();
-            // if(error.error.message){
-            //   this.responseMessage=error.error.message;
-            // }else {
-            //   this.responseMessage =GlobalConstant.genericError;
-            // }
-
-            this.snackbarService.openSnakbar(error.message,GlobalConstant.error)
+            if(error.error.message){
+              this.responseMessage=error.error.message;
+            }else {
+              this.responseMessage =GlobalConstant.genericError;
+            }
+            this.snackbarService.openSnakbar(customError.message,GlobalConstant.error)
         }
 
       }
@@ -116,6 +117,8 @@ validator():boolean{
     );
 
   }
+
+
 
 
 }
