@@ -3,13 +3,18 @@ import { RouterModule, Routes } from '@angular/router';
 import {HomeComponent} from "./home/home.component";
 import {FullComponent} from "./layouts/full.component";
 import {DashboardComponent} from "./dashboard/dashboard.component";
-import {RouteGuard} from "../service/route.guard";
+import {routeGuard} from "../service/route.guard";
+
+
+
 
 const routes: Routes = [
   {
     path:'',
-    component:HomeComponent
+    component:HomeComponent,
+    // canActivate:[routeGuard]
   },
+
   {
     path:'cafe',
     component:FullComponent,
@@ -20,7 +25,10 @@ const routes: Routes = [
         // redirectTo:'/cafe/dashboard',
         pathMatch:'full',
         component:DashboardComponent,
-        canActivate:[RouteGuard]
+        canActivate:[routeGuard],
+        data:{
+          'role':['user','admin']
+        }
 
       },
 
@@ -30,13 +38,20 @@ const routes: Routes = [
           () => import(
 
             './material-component/material-component.module'
-            ).then(m=>m.MaterialComponentModule)
+            ).then(m=>m.MaterialComponentModule),
+        data:{
+          expectedRole:['admin','user']
+        }
       },
       {
         path:'dashboard',
         loadChildren:() => import('./dashboard/dashboard.module').then(
           m=>m.DashboardModule
         ),
+        data:{
+          expectedRole:['admin','user']
+        }
+
 
       },
       {

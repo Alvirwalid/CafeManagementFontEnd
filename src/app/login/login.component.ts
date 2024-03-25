@@ -31,7 +31,7 @@ export class LoginComponent implements OnInit{
 
   ) {
     this.isAuthenticated = !!localStorage.getItem('token');
-    console.log(this.isAuthenticated);
+    console.log( 'Authenticated : '+this.isAuthenticated);
 
   }
   ngOnInit(): void {
@@ -55,9 +55,10 @@ export class LoginComponent implements OnInit{
 
         this.ngxService.stop();
         this.authService.accessToken=res.data.data['token']
+        localStorage.setItem('token',res.data.data['token'])
         this.authService.authenticated=true;
         this.dialogRef.close();
-        this.router.navigate(['/cafe/dashboard'])
+        this.router.navigate(['/cafe'])
         this.snackbarService.openSnakbar(res.message,'');
         this.isAuthenticated = true;
 
@@ -67,6 +68,7 @@ export class LoginComponent implements OnInit{
         console.log('error')
         this.ngxService.stop();
         this.isAuthenticated = false;
+        this.authService.authenticated=false;
 
         this.snackbarService.openSnakbar(error.message,'');
       }

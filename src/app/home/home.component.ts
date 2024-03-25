@@ -4,7 +4,8 @@ import {SignupComponent} from "../signup/signup.component";
 import {ForgotpasswordComponent} from "../forgotpassword/forgotpassword.component";
 import {LoginComponent} from "../login/login.component";
 import {LoginService} from "../../service/login.service";
-import {Route, Router} from "@angular/router";
+import {ActivatedRouteSnapshot, Route, Router, RouterStateSnapshot} from "@angular/router";
+import {AuthService} from "../../service/auth.service";
 
 @Component({
   selector: 'app-home',
@@ -17,7 +18,8 @@ export class HomeComponent {
   token='';
 
   private loginService=Inject(LoginComponent)
-  constructor(private  dialog:MatDialog) {
+  // private  authService=Inject(AuthService);
+  constructor(private  dialog:MatDialog,private  s:AuthService) {
   }
 
   handleSignUpAction(){
@@ -40,10 +42,13 @@ export class HomeComponent {
    getToken(){
     this.token=localStorage.getItem('token')??'No token found'
   }
-  // logout(): void {
-  //   this.loginService.logout();
-  //   this.route.navigate(['/login']);
-  // }
+  logout(): void {
+    this.s.signOut().subscribe({
+      next:(res)=>{
+        console.log(res)
+      }
+    });
+  }
 
 
 

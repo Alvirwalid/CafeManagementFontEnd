@@ -7,6 +7,7 @@ export  class GlobalConstant{
   public  static  nameRegex='[a-zA-Z0-9 ]*';
   public  static  emailRegex="^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$";
   public  static  contactNumberRegex='^[e0-9]{10,11}$';
+  public  static  unautorized='Unauthorized';
 
   ///Variable
 public  static  error='error'
