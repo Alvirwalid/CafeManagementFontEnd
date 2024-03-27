@@ -1,14 +1,14 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {GlobalConstant} from "../share/global_constant";
-import {UserService} from "../../service/user.service";
+import {UserService} from "../service/user.service";
 import {NgxUiLoaderService} from "ngx-ui-loader";
 import {MatDialogRef} from "@angular/material/dialog";
 import {Router} from "@angular/router";
-import {SnackbarService} from "../../service/snackbar.service";
-import {LoginService} from "../../service/login.service";
+import {SnackbarService} from "../service/snackbar.service";
+import {LoginService} from "../service/login.service";
 import {error} from "@angular/compiler-cli/src/transformers/util";
-import {AuthService} from "../../service/auth.service";
+import {AuthService} from "../service/auth.service";
 
 @Component({
   selector: 'app-login',

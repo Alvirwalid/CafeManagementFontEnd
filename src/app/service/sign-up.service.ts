@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
 import {AppCrudRequestService} from "./app-crud-request.service";
-import {UserModel} from "../app/model/userModel";
+import {UserModel} from "../model/userModel";
 import {HttpClient} from "@angular/common/http";
-import {environment} from "../environments/environment";
-import {AppUtils} from "../app/utils/app-utils";
+import {environment} from "../../environments/environment";
+import {AppUtils} from "../utils/app-utils";
 import {Observable} from "rxjs";
-import {CommonResponseObject} from "../app/model/common_response";
+import {CommonResponseObject} from "../model/common_response";
 
 @Injectable({
   providedIn: 'root'

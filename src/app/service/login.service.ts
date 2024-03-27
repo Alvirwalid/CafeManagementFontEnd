@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import {AppCrudRequestService} from "./app-crud-request.service";
-import {LoginResponse} from "../app/model/login_response";
+import {LoginResponse} from "../model/login_response";
 import {HttpClient} from "@angular/common/http";
-import {AppUtils} from "../app/utils/app-utils";
+import {AppUtils} from "../utils/app-utils";
 import {Observable} from "rxjs";
-import {CommonResponseObject} from "../app/model/common_response";
+import {CommonResponseObject} from "../model/common_response";
 
 @Injectable({
   providedIn: 'root'

@@ -3,9 +3,9 @@ import {MatDialog, MatDialogConfig} from "@angular/material/dialog";
 import {SignupComponent} from "../signup/signup.component";
 import {ForgotpasswordComponent} from "../forgotpassword/forgotpassword.component";
 import {LoginComponent} from "../login/login.component";
-import {LoginService} from "../../service/login.service";
+import {LoginService} from "../service/login.service";
 import {ActivatedRouteSnapshot, Route, Router, RouterStateSnapshot} from "@angular/router";
-import {AuthService} from "../../service/auth.service";
+import {AuthService} from "../service/auth.service";
 
 @Component({
   selector: 'app-home',

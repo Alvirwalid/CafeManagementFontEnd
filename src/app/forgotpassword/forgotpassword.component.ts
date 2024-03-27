@@ -1,10 +1,10 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {GlobalConstant} from "../share/global_constant";
-import {UserService} from "../../service/user.service";
+import {UserService} from "../service/user.service";
 import {NgxUiLoaderService} from "ngx-ui-loader";
 import {MatDialogRef} from "@angular/material/dialog";
-import {SnackbarService} from "../../service/snackbar.service";
+import {SnackbarService} from "../service/snackbar.service";
 import {CommonResponseObject} from "../model/common_response";
 
 @Component({

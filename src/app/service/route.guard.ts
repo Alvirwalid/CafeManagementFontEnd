@@ -1,12 +1,12 @@
 import {ActivatedRouteSnapshot, CanActivateFn, RouterStateSnapshot,} from '@angular/router';
 import { inject } from '@angular/core';
 import { CanActivate, CanActivateChild, CanDeactivate, CanLoad, Router } from '@angular/router';
-import {LoginComponent} from "../app/login/login.component";
+import {LoginComponent} from "../login/login.component";
 import {AuthService} from "./auth.service";
 import {jwtDecode} from 'jwt-decode';
 import {Token} from "@angular/compiler";
 import {SnackbarService} from "./snackbar.service";
-import {GlobalConstant} from "../app/share/global_constant";
+import {GlobalConstant} from "../share/global_constant";
 
 
 
@@ -20,50 +20,65 @@ export const routeGuard: CanActivateFn = (route:ActivatedRouteSnapshot, state:Ro
 
 
   const  snackbarService=inject(SnackbarService);
-  console.log(authService.isAuthenticated())
+  // console.log(authService.isAuthenticated())
 
   let  expectedRoleArray = route.routeConfig?.data
-  expectedRoleArray= expectedRoleArray?.['role']
+  expectedRoleArray= expectedRoleArray?.['expectedRole']
   let token = "........";
   token =localStorage.getItem('token')??"";
    var tokenPayLoad;
-  console.log('Token : '+token)
+  // console.log('Token : '+token)
 
   try {
-    tokenPayLoad = jwtDecode(token);
+
+    if(token){
+      tokenPayLoad = jwtDecode(token);
+      var expectedRole='';
+
+      for(var i=0;i<expectedRoleArray?.['length'];i++){
+        // @ts-ignore
+        if(expectedRoleArray?.[i]==tokenPayLoad['role']){
+
+          expectedRole=expectedRoleArray?.[i];
+
+        }
+      }
+
+      // @ts-ignore
+      if(tokenPayLoad['role'] === 'user' || tokenPayLoad['role']==='admin'){
+        // @ts-ignore
+        if(authService.isAuthenticated() && expectedRole == tokenPayLoad['role']){
+
+          return true;
+        }
+
+        snackbarService.openSnakbar(GlobalConstant.unautorized,GlobalConstant.error)
+        router.navigate(['/'])
+
+        return  false;
+
+      }else {
+        snackbarService.openSnakbar(GlobalConstant.unautorized,GlobalConstant.error)
+        localStorage.clear();
+        router.navigate(['/'])
+        return false;
+      }
+
+
+    }else{
+      snackbarService.openSnakbar(GlobalConstant.unautorized,GlobalConstant.error)
+      localStorage.clear()
+      router.navigate(['/'])
+      return  false;
+    }
+
     console.log(tokenPayLoad);
   }catch (e){
     localStorage.clear();
     router.navigate(['/'])
-  }
-var expectedRole='';
-
-   for(var i=0;i<expectedRoleArray?.['length'];i++){
-  // @ts-ignore
-    if(expectedRoleArray?.[i]==tokenPayLoad['role']){
-
-      expectedRole=expectedRoleArray?.[i];
-
-    }
-  }
-
-  // @ts-ignore
-  if(tokenPayLoad['role'] === 'user' || tokenPayLoad['role']==='admin'){
-    // @ts-ignore
-    if(authService.isAuthenticated() && expectedRole == tokenPayLoad['role']){
-      return true;
-    }
-
-    snackbarService.openSnakbar(GlobalConstant.unautorized,GlobalConstant.error)
-
     return  false;
-
-  }else {
-
-    router.navigate(['/'])
-    localStorage.clear();
-    return false;
   }
+
 
 
 ///////////////////

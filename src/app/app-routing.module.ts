@@ -3,7 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import {HomeComponent} from "./home/home.component";
 import {FullComponent} from "./layouts/full.component";
 import {DashboardComponent} from "./dashboard/dashboard.component";
-import {routeGuard} from "../service/route.guard";
+import {routeGuard} from "./service/route.guard";
 
 
 
@@ -27,7 +27,7 @@ const routes: Routes = [
         component:DashboardComponent,
         canActivate:[routeGuard],
         data:{
-          'role':['user','admin']
+          expectedRole:['admin','user']
         }
 
       },
@@ -48,10 +48,10 @@ const routes: Routes = [
         loadChildren:() => import('./dashboard/dashboard.module').then(
           m=>m.DashboardModule
         ),
+        canActivate:[routeGuard],
         data:{
           expectedRole:['admin','user']
         }
-
 
       },
       {
