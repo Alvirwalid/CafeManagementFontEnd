@@ -1,13 +1,13 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {UserService} from "../../service/user.service";
-import {SnackbarService} from "../../service/snackbar.service";
+import {UserService} from "../service/user.service";
+import {SnackbarService} from "../service/snackbar.service";
 import {MatDialogRef} from "@angular/material/dialog";
 import {NgxUiLoaderService} from "ngx-ui-loader";
 import {GlobalConstant} from "../share/global_constant";
 import {CustomValidators} from "./validatior";
 import {CommonResponseObject} from "../model/common_response";
-import {SignUpService} from "../../service/sign-up.service";
+import {SignUpService} from "../service/sign-up.service";
 import {UserModel} from "../model/userModel";
 @Component({
   selector: 'app-signup',

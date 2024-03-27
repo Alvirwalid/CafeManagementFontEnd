@@ -1,7 +1,7 @@
 import { Directive } from '@angular/core';
 
 @Directive({
-  selector: '[appAccordionanchor]'
+  selector: '[appAccordionToggle]'
 })
 export class AccordionanchorDirective {
 

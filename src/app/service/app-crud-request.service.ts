@@ -1,8 +1,8 @@
 
 import {HttpClient, HttpHeaders} from "@angular/common/http";
-import {environment} from "../environments/environment";
+import {environment} from "../../environments/environment";
 import {Observable} from "rxjs";
-import {CommonResponseList, CommonResponseObject} from "../app/model/common_response";
+import {CommonResponseList, CommonResponseObject} from "../model/common_response";
 
 
 export abstract class AppCrudRequestService<I> {

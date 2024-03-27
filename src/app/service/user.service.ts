@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import {environment} from "../environments/environment";
+import {environment} from "../../environments/environment";
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Observable} from "rxjs";
-import {CommonResponseObject} from "../app/model/common_response";
+import {CommonResponseObject} from "../model/common_response";
 
 
 @Injectable({
@@ -34,5 +34,10 @@ export class UserService {
     return this.httpClient.post<CommonResponseObject<any>>(this.url+'/login',data,{
       headers: new HttpHeaders().set("Content-Type","application/json")
     })
+  }
+
+  changePassowrd(data:any):Observable<CommonResponseObject<any>>{
+    return  this.httpClient.post<CommonResponseObject<any>>(this.url+'/user/changePassword',data)
+
   }
 }

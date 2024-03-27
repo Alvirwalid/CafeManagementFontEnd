@@ -6,20 +6,22 @@ import { AppComponent } from './app.component';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
-import {MaterialModule} from "./share/material/material.module";
+import {MaterialModule} from "./share/material.module";
 import {FlexLayoutModule} from "@angular/flex-layout";
-import {ShareModule} from "./share/share/share.module";
+import {ShareModule} from "./share/share.module";
 import { FullComponent } from './layouts/full.component';
 import { HeaderComponent } from './layouts/header/header.component';
-import { SidenaveComponent } from './layouts/sidenave/sidenave.component';
+import { SideNaveComponent } from './layouts/sidenave/side-nave.component';
 import { HomeComponent } from './home/home.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { BestSallerComponent } from './best-saller/best-saller.component';
-import {HttpClientModule} from "@angular/common/http";
+import {HTTP_INTERCEPTORS, HttpClientModule, provideHttpClient, withInterceptors} from "@angular/common/http";
 import { SignupComponent } from './signup/signup.component';
 import {NgxUiLoaderConfig, NgxUiLoaderModule, SPINNER} from "ngx-ui-loader";
 import { ForgotpasswordComponent } from './forgotpassword/forgotpassword.component';
 import { LoginComponent } from './login/login.component';
+import {tokenInterceptorInterceptor} from "./service/token-interceptor.interceptor";
+import {MatSidenavModule} from "@angular/material/sidenav";
 
 
 const ngxUiLoaderConfig:NgxUiLoaderConfig={
@@ -40,7 +42,7 @@ const ngxUiLoaderConfig:NgxUiLoaderConfig={
     AppComponent,
     FullComponent,
     HeaderComponent,
-    SidenaveComponent,
+    SideNaveComponent,
     HomeComponent,
     // DashboardComponent,
     BestSallerComponent,
@@ -60,11 +62,16 @@ const ngxUiLoaderConfig:NgxUiLoaderConfig={
     FlexLayoutModule,
     ShareModule,
     HttpClientModule,
-    NgxUiLoaderModule.forRoot(ngxUiLoaderConfig)
+    NgxUiLoaderModule.forRoot(ngxUiLoaderConfig),
+    MatSidenavModule,
 
   ],
   providers: [
-    provideAnimationsAsync()
+    provideAnimationsAsync(),
+    HttpClientModule,
+    provideHttpClient(
+      withInterceptors([tokenInterceptorInterceptor]))
+    // {provide:HTTP_INTERCEPTORS,useClass:HttpInterceptorFn,multi:true}
   ],
   bootstrap: [AppComponent]
 })
