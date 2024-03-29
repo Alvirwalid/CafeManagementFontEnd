@@ -1,17 +1,17 @@
 body{
   padding: 10px;
-  margin: 16px;
+  //margin: 16px;
 
 }
+* {
+  box-sizing: border-box;
+}
 .btn{
-  width: 100%;
+ width: 80%;
+  position: absolute;
+  bottom: 10px;
 }
-mat-card{
-  //padding: 10px;
-  margin-right: 10px;
-  text-align: center;
-  width: 30%;
-}
+
 .row{
   display: flex;
 }
@@ -19,3 +19,21 @@ mat-card{
   width: 100%;
   padding: 16px;
 }
+.card-container {
+  display: flex;
+  flex-wrap: wrap;
+
+  .card {
+    position: relative;
+    width: 200px;
+    min-height: 20%;
+    justify-content: center;
+    background-color: #f0f0f0;
+    margin: 10px;
+    padding: 10px;
+  }
+}
+
+
+
+

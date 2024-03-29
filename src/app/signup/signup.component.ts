@@ -82,10 +82,10 @@ validator():boolean{
       username:formData.email,
       contactNumber:formData.contactNumber,
       password:formData.password,
-      role: this.isAdmin?'admin':'user'
+      role: formData.role
     }
 
-    // console.log(data);
+    console.log(data);
 
     this.service.signUp(data).subscribe(
 

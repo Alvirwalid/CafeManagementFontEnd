@@ -1,9 +1,11 @@
-import {ChangeDetectorRef, Component, inject, OnDestroy} from '@angular/core';
+import {ChangeDetectorRef, Component, inject, OnDestroy, signal} from '@angular/core';
 import {MatchMedia} from "@angular/flex-layout/core/match-media";
 import {MediaMatcher} from "@angular/cdk/layout";
 import * as console from "console";
 import {MenuItems} from "../../share/menu_item";
 import {jwtDecode} from "jwt-decode"
+
+
 
 @Component({
   selector: 'app-sidenave',
@@ -43,5 +45,4 @@ export class SideNaveComponent implements OnDestroy{
     // this.mdq.removeListener(this.mediaQueryListener);
   }
 
-  protected readonly menubar = menubar;
 }

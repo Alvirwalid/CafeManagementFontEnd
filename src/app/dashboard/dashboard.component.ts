@@ -50,6 +50,7 @@ export class DashboardComponent implements AfterViewInit{
         }else {
           this.responseMassage=GlobalConstant.genericError;
         }
+        console.log("Error")
         this.snackbarService.openSnakbar(this.responseMassage,'');
       }
     })

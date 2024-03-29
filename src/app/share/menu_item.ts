@@ -1,4 +1,4 @@
-import {Injectable} from "@angular/core"
+import {Injectable, signal} from "@angular/core"
 export interface Menu{
   state:string;
   name:string;
@@ -7,11 +7,15 @@ export interface Menu{
   role:string;
 }
 
-const MENUITEMS =[{state:'dashboard',name:'Dashboard',type:'link',icon:'dashboard',role:''}]
+const MENUITEMS =[
+  {state:'dashboard',name:'Dashboard',type:'link',icon:'dashboard',role:''},
+  {state:'category',name:'Manage Category',type:'link',icon:'category',role:'admin'},
+]
 
 @Injectable()
 export  class MenuItems{
-  getMenuItem():Menu[] {
+
+  getMenuItem(){
     return MENUITEMS;
   }
 }

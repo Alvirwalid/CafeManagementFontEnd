@@ -4,6 +4,8 @@ import {HomeComponent} from "./home/home.component";
 import {FullComponent} from "./layouts/full.component";
 import {DashboardComponent} from "./dashboard/dashboard.component";
 import {routeGuard} from "./service/route.guard";
+import {ManageCategoryComponent} from "./material-component/manage-category/manage-category.component";
+import {MaterialComponentModule} from "./material-component/material-component.module";
 
 
 
@@ -11,35 +13,31 @@ import {routeGuard} from "./service/route.guard";
 const routes: Routes = [
   {
     path:'',
-    component:HomeComponent,
+    pathMatch:'full',
+    redirectTo:'home'
     // canActivate:[routeGuard]
   },
+
 
   {
     path:'cafe',
     component:FullComponent,
     children:[
-      // {
-      //   path:'dashboard',
-      //   // redirectTo:'/cafe/dashboard',
-      //   pathMatch:'full',
-      //   component:DashboardComponent,
-      //   canActivate:[routeGuard],
-      //   data:{
-      //     expectedRole:['admin','user']
-      //   }
-      //
-      // },
-
       {
         path:'',
+        pathMatch:'full',
+        redirectTo:'dashboard'
+      },
+
+      {
+        path:'category',
         loadChildren:
           () => import(
 
             './material-component/material-component.module'
             ).then(m=>m.MaterialComponentModule),
         data:{
-          expectedRole:['admin','user']
+          expectedRole:['admin']
         }
       },
       {
@@ -56,6 +54,10 @@ const routes: Routes = [
 
 
     ],
+  },
+  {
+    path:'home',
+    component:HomeComponent
   },
   {
     path:'**',

@@ -1,3 +1,16 @@
+:host *{
+  transition: all 500ms ease-in-out;
+}
+
+mat-nav-list{
+  transition: all 500ms ease-in-out;
+}
+.menu-item{
+  border-left: 15px solid;
+  //border-left-color: blue;
+  border-left-color: rgba(0,0,0,0);
+  //background: blue;
+}
 .selected-menu-item{
   border-left: 5px solid;
   border-left-color: blue;

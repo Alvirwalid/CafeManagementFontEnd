@@ -62,6 +62,9 @@
 <!--      <small  *ngIf="signUpForm.controls.password.errors?.['pattern']">This field is invalid</small>-->
     </mat-error>
   </mat-form-field>
+
+
+
   <mat-form-field fxFlex appearance="outline">
 
     <mat-label>Confirm Password</mat-label>
@@ -80,6 +83,8 @@
 && signUpForm.get('confirmPassword').dirty">The password doesn't match!</small>
     </mat-error>
   </mat-form-field>
+
+
   <mat-radio-group aria-label="Select an option" formControlName="role" required>
     <mat-radio-button value="admin">Admin</mat-radio-button>
     <mat-radio-button value="user" checked="true">User</mat-radio-button>

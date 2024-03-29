@@ -70,7 +70,8 @@ const ngxUiLoaderConfig:NgxUiLoaderConfig={
     provideAnimationsAsync(),
     HttpClientModule,
     provideHttpClient(
-      withInterceptors([tokenInterceptorInterceptor]))
+      withInterceptors([tokenInterceptorInterceptor])
+    )
     // {provide:HTTP_INTERCEPTORS,useClass:HttpInterceptorFn,multi:true}
   ],
   bootstrap: [AppComponent]

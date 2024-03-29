@@ -13,6 +13,8 @@ import {GlobalConstant} from "../share/global_constant";
 
 export const routeGuard: CanActivateFn = (route:ActivatedRouteSnapshot, state:RouterStateSnapshot):boolean => {
 
+  console.log('Router Guard')
+
 
 
   const  router=inject(Router);
@@ -46,6 +48,13 @@ export const routeGuard: CanActivateFn = (route:ActivatedRouteSnapshot, state:Ro
 
       // @ts-ignore
       if(tokenPayLoad['role'] === 'user' || tokenPayLoad['role']==='admin'){
+
+        // @ts-ignore
+        if(tokenPayLoad['role'] === 'admin'){
+          console.log('admin')
+        }else {
+          console.log('user')
+        }
         // @ts-ignore
         if(authService.isAuthenticated() && expectedRole == tokenPayLoad['role']){
 

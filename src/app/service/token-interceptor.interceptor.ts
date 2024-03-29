@@ -22,7 +22,7 @@ export const tokenInterceptorInterceptor: HttpInterceptorFn = (req, next) => {
     catchError(err => {
 
     if(err instanceof  HttpErrorResponse){
-      console.log(err.url);
+      console.log("Interceptor Error"+err.url);
       if(err.status===401 || err.status==403){
 
         if(router.url == '/'){}else {

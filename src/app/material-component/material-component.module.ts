@@ -10,6 +10,7 @@ import {CdkTableModule} from "@angular/cdk/table";
 import { ViewBillProductsComponent } from './diolog/view-bill-products/view-bill-products.component';
 import { ConfirmationComponent } from './diolog/confirmation/confirmation.component';
 import { ChangepasswordComponent } from './diolog/changepassword/changepassword.component';
+import { ManageCategoryComponent } from './manage-category/manage-category.component';
 
 
 
@@ -17,7 +18,8 @@ import { ChangepasswordComponent } from './diolog/changepassword/changepassword.
   declarations: [
     ViewBillProductsComponent,
     ConfirmationComponent,
-    ChangepasswordComponent
+    ChangepasswordComponent,
+    ManageCategoryComponent
   ],
   imports: [
     CommonModule,
@@ -29,5 +31,8 @@ import { ChangepasswordComponent } from './diolog/changepassword/changepassword.
     FlexLayoutModule,
     CdkTableModule
   ],
+  exports: [
+    ManageCategoryComponent
+  ]
 })
 export class MaterialComponentModule { }

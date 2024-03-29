@@ -4,32 +4,29 @@
 </mat-card>
 <br>
 
-<div class="row">
 
-<mat-card>
-  <div class="container">
+<div class="card-container">
+  <mat-card class="card">
     <h1 class="title">Total Category</h1>
     <h2 class="title">{{data?.category}}</h2>
     <button mat-raised-button class="btn" color="primary">View Category</button>
-  </div>
-</mat-card>
-
-  <mat-card>
+  </mat-card>
+  <mat-card class="card">
     <div >
       <h1 class="title">Total Product</h1>
       <h2 class="title">{{data?.product}}</h2>
       <button mat-raised-button class="btn" color="primary">View Product</button>
     </div>
   </mat-card>
-
-  <mat-card>
+  <mat-card class="card">
     <div >
       <h1 class="title">Total Bill</h1>
       <h2 class="title">{{data?.bill}}</h2>
       <button mat-raised-button class="btn" color="primary">View Bill</button>
     </div>
   </mat-card>
-
-
+  <!-- Add more cards here -->
 </div>
+
+
 </body>
