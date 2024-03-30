@@ -16,7 +16,7 @@ import {CategoryComponent} from "../diolog/category/category.component";
 })
 export class ManageCategoryComponent implements OnInit{
 
-  displayedColumn:string[]=['name','edit'];
+  displayedColumns:string[]=['name','edit'];
   dataSource:any;
   responseMessage:any;
   constructor(
@@ -97,8 +97,6 @@ export class ManageCategoryComponent implements OnInit{
   applyFilter(event:Event){
 
     // console.log((event.target as HTMLInputElement).value)
-
-
     const filterValue =(event.target as HTMLInputElement).value
     this.dataSource.filter =filterValue.trim().toLowerCase();
   }
