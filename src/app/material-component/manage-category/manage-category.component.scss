@@ -1,4 +1,23 @@
-.container{
+body{
   padding: 15px;
-  min-height:100%;
+  min-height:100vh;
 }
+
+
+.matHeader{
+  padding: 20px;
+}
+table{
+  width: 100%;
+}
+
+::ng-deep .highlight{
+  color: white;
+  background: #7b1fa2;
+}
+.container {
+  display: flex;
+  justify-content: space-between;
+}
+
+

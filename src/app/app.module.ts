@@ -22,6 +22,7 @@ import { ForgotpasswordComponent } from './forgotpassword/forgotpassword.compone
 import { LoginComponent } from './login/login.component';
 import {tokenInterceptorInterceptor} from "./service/token-interceptor.interceptor";
 import {MatSidenavModule} from "@angular/material/sidenav";
+import {MatTableModule} from "@angular/material/table";
 
 
 const ngxUiLoaderConfig:NgxUiLoaderConfig={
@@ -64,6 +65,7 @@ const ngxUiLoaderConfig:NgxUiLoaderConfig={
     HttpClientModule,
     NgxUiLoaderModule.forRoot(ngxUiLoaderConfig),
     MatSidenavModule,
+    MatTableModule
 
   ],
   providers: [

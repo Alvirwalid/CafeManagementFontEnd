@@ -11,6 +11,8 @@ import { ViewBillProductsComponent } from './diolog/view-bill-products/view-bill
 import { ConfirmationComponent } from './diolog/confirmation/confirmation.component';
 import { ChangepasswordComponent } from './diolog/changepassword/changepassword.component';
 import { ManageCategoryComponent } from './manage-category/manage-category.component';
+import { CategoryComponent } from './diolog/category/category.component';
+import { ManageProductComponent } from './manage-product/manage-product.component';
 
 
 
@@ -19,7 +21,10 @@ import { ManageCategoryComponent } from './manage-category/manage-category.compo
     ViewBillProductsComponent,
     ConfirmationComponent,
     ChangepasswordComponent,
-    ManageCategoryComponent
+    ManageCategoryComponent,
+    CategoryComponent,
+    ManageProductComponent,
+    ManageProductComponent
   ],
   imports: [
     CommonModule,
@@ -32,7 +37,8 @@ import { ManageCategoryComponent } from './manage-category/manage-category.compo
     CdkTableModule
   ],
   exports: [
-    ManageCategoryComponent
+    ManageCategoryComponent,
+    ManageProductComponent
   ]
 })
 export class MaterialComponentModule { }

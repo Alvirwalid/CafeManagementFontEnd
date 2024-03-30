@@ -22,7 +22,7 @@ export class CategoryService {
   }
 
   update(data:any):Observable<CommonResponseObject<any>>{
-    return  this.http.post<CommonResponseObject<any>>(this.url+'/category/update',data,
+    return  this.http.put<CommonResponseObject<any>>(this.url+'/category/update',data,
       {
         headers:new HttpHeaders().set('Content-Type','application/json')
       });

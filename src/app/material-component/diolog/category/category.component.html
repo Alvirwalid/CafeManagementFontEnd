@@ -1,0 +1,27 @@
+<mat-toolbar>
+
+    <span>{{dialogData.action}} Category</span>
+    <span class="spacer"></span>
+    <button mat-icon-button mat-dialog-close><mat-icon >close</mat-icon></button>
+
+</mat-toolbar>
+<mat-dialog-content>
+  <form [formGroup]="categoryForm">
+    <div>
+      <mat-form-field appearance="outline" fxFlex>
+        <mat-label>Name</mat-label>
+        <input matInput formControlName="name">
+      </mat-form-field>
+
+      <mat-error *ngIf="categoryForm.get('name').touched && categoryForm.get('name').invalid">
+        <small *ngIf="categoryForm.get('name').hasError('required')">This field is required.</small>
+      </mat-error>
+    </div>
+
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-raised-button color="primary" (click)="handleSubmit()" ><mat-icon>send</mat-icon>Send</button>
+  <button mat-raised-button mat-dialog-close color="warn" ><mat-icon>cancel</mat-icon>Cancel</button>
+</mat-dialog-actions>
+

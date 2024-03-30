@@ -1,21 +1,29 @@
+@use '@angular/material' as mat;
+
+
+.card {
+  @include mat.elevation-transition();
+  @include mat.elevation(5);
+  //&:active {
+  //  @include mat.elevation(20);
+  //}
+}
+
 body{
   padding: 10px;
+  height: 100vh;
   //margin: 16px;
 
 }
 * {
   box-sizing: border-box;
 }
-.btn{
- width: 80%;
-  position: absolute;
-  bottom: 10px;
-}
+
 
 .row{
   display: flex;
 }
-.title{
+.mainTitle{
   width: 100%;
   padding: 16px;
 }
@@ -25,13 +33,32 @@ body{
 
   .card {
     position: relative;
-    width: 200px;
-    min-height: 20%;
-    justify-content: center;
+    //display: flex;
+
+    width: 25%;
+    min-height: 200px;
     background-color: #f0f0f0;
     margin: 10px;
     padding: 10px;
+
+    text-align: center;
+
+    .btn{
+      margin-left: auto;
+      margin-right: auto;
+      position: absolute;
+      bottom: 8px;
+      right: 20px;
+      left: 20px;
+    }
   }
+}
+
+@media (min-width:300px) {
+  .card{
+    width: 50%;
+  }
+
 }
 
 

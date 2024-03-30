@@ -30,7 +30,7 @@ const routes: Routes = [
       },
 
       {
-        path:'category',
+        path:'',
         loadChildren:
           () => import(
 
@@ -40,6 +40,20 @@ const routes: Routes = [
           expectedRole:['admin']
         }
       },
+
+      {
+        path:'',
+        loadChildren:
+          () => import(
+
+            './material-component/material-component.module'
+            ).then(m=>m.MaterialComponentModule),
+        data:{
+          expectedRole:['admin','user']
+        }
+      },
+
+
       {
         path:'dashboard',
         loadChildren:() => import('./dashboard/dashboard.module').then(

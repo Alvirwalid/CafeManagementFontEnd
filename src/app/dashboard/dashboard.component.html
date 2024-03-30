@@ -1,12 +1,12 @@
 <body>
-<mat-card class="title">
+<mat-card class="mainTitle">
   <b><span>Dashboard</span></b>
 </mat-card>
 <br>
 
 
 <div class="card-container">
-  <mat-card class="card">
+  <mat-card class="card" [class.mat-elevation-z8]="true" >
     <h1 class="title">Total Category</h1>
     <h2 class="title">{{data?.category}}</h2>
     <button mat-raised-button class="btn" color="primary">View Category</button>
