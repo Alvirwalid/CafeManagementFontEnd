@@ -23,6 +23,7 @@ import { LoginComponent } from './login/login.component';
 import {tokenInterceptorInterceptor} from "./service/token-interceptor.interceptor";
 import {MatSidenavModule} from "@angular/material/sidenav";
 import {MatTableModule} from "@angular/material/table";
+import {MatTooltip} from "@angular/material/tooltip";
 
 
 const ngxUiLoaderConfig:NgxUiLoaderConfig={
@@ -65,7 +66,8 @@ const ngxUiLoaderConfig:NgxUiLoaderConfig={
     HttpClientModule,
     NgxUiLoaderModule.forRoot(ngxUiLoaderConfig),
     MatSidenavModule,
-    MatTableModule
+    MatTableModule,
+
 
   ],
   providers: [

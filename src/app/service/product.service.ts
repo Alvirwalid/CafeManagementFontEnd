@@ -45,6 +45,6 @@ export class ProductService {
   }
 
   deleteById(id:any):Observable<CommonResponseObject<any>>{
-    return  this.http.get<CommonResponseObject<any>>(this.url+`/products/delete/${id}`);
+    return  this.http.delete<CommonResponseObject<any>>(this.url+`/products/delete/${id}`);
   }
 }

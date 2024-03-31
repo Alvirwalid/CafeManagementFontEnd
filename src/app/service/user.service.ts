@@ -37,7 +37,7 @@ export class UserService {
   }
 
   changePassowrd(data:any):Observable<CommonResponseObject<any>>{
-    return  this.httpClient.post<CommonResponseObject<any>>(this.url+'/user/changepssword',data)
+    return  this.httpClient.post<CommonResponseObject<any>>(this.url+'/user/changePassword',data)
 
   }
 }

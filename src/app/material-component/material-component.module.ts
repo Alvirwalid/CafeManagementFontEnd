@@ -13,6 +13,8 @@ import { ChangepasswordComponent } from './diolog/changepassword/changepassword.
 import { ManageCategoryComponent } from './manage-category/manage-category.component';
 import { CategoryComponent } from './diolog/category/category.component';
 import { ManageProductComponent } from './manage-product/manage-product.component';
+import { ProductComponent } from './diolog/product/product.component';
+import {MatTooltip} from "@angular/material/tooltip";
 
 
 
@@ -24,18 +26,20 @@ import { ManageProductComponent } from './manage-product/manage-product.componen
     ManageCategoryComponent,
     CategoryComponent,
     ManageProductComponent,
-    ManageProductComponent
+    ManageProductComponent,
+    ProductComponent
   ],
-  imports: [
-    CommonModule,
-    RouterModule.forChild(MaterialRoutes),
-    MaterialModule,
-    HttpClientModule,
-    FormsModule,
-    ReactiveFormsModule,
-    FlexLayoutModule,
-    CdkTableModule
-  ],
+    imports: [
+        CommonModule,
+        RouterModule.forChild(MaterialRoutes),
+        MaterialModule,
+        HttpClientModule,
+        FormsModule,
+        ReactiveFormsModule,
+        FlexLayoutModule,
+        CdkTableModule,
+        MatTooltip
+    ],
   exports: [
     ManageCategoryComponent,
     ManageProductComponent

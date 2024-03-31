@@ -21,9 +21,7 @@ export class ConfirmationComponent implements OnInit{
   }
 
   handleChangeAction(){
-   var f= this.onEmitStatusChange.emit();
-
-   console.log(f);
+    this.onEmitStatusChange.emit();
   }
 
 }

@@ -92,18 +92,20 @@ validator():boolean{
       {
 
         next:(res)=>{
+          this.ngxService.stop();
+          this.dialogRef.close();
             console.log('Response : '+res.message);
             console.log('Response : '+res.status);
             console.log('Response : '+res.data.username);
-            this.ngxService.stop();
-            this.dialogRef.close();
             this.responseMessage=res.message;
             this.snackbarService.openSnakbar(res.message,"")
 
         },
         error:(error)=>{
+
+          console.log(error.error(error.message))
+          this.ngxService.stop();
           const customError: CommonResponseObject<any> = error.error as CommonResponseObject<any>;
-            this.ngxService.stop();
             if(error.error.message){
               this.responseMessage=error.error.message;
             }else {
