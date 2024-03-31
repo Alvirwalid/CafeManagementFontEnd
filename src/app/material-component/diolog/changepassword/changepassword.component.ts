@@ -72,12 +72,7 @@ export class ChangepasswordComponent implements OnInit{
   }
 
   validator():boolean{
-    if(this.changePassForm.get('password').value != this.changePassForm.get('confirmPassword').value){
-      return true;
-    }else {
-
-      return  false;
-    }
+    return this.changePassForm.get('password').value != this.changePassForm.get('confirmPassword').value;
   }
 
   protected readonly signUpForm = FormGroup;

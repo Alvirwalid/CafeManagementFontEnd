@@ -3,7 +3,6 @@ import {environment} from "../../environments/environment";
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {CommonResponseObject} from "../model/common_response";
-import * as http from "http";
 
 @Injectable({
   providedIn: 'root'

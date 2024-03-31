@@ -8,7 +8,7 @@ import {GlobalConstant} from "../share/global_constant";
 import {CustomValidators} from "./validatior";
 import {CommonResponseObject} from "../model/common_response";
 import {SignUpService} from "../service/sign-up.service";
-import {UserModel} from "../model/userModel";
+
 @Component({
   selector: 'app-signup',
   templateUrl: './signup.component.html',
@@ -67,12 +67,7 @@ export class SignupComponent implements OnInit{
 // }
 
 validator():boolean{
-    if(this.signUpForm.get('password').value != this.signUpForm.get('confirmPassword').value){
-      return true;
-    }else {
-
-      return  false;
-    }
+    return this.signUpForm.get('password').value != this.signUpForm.get('confirmPassword').value;
 }
   handleSubmit(){
     this.ngxService.start();

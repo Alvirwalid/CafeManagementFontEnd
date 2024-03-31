@@ -5,8 +5,6 @@ import {CategoryService} from "../../../../service/category.service";
 import {SnackbarService} from "../../../service/snackbar.service";
 import {NgxUiLoaderService} from "ngx-ui-loader";
 import {GlobalConstant} from "../../../share/global_constant";
-import {CommonResponseObject} from "../../../model/common_response";
-import {MatTableDataSource} from "@angular/material/table";
 
 @Component({
   selector: 'app-category',
