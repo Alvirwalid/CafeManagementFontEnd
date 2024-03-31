@@ -11,13 +11,20 @@
   <form [formGroup]="productForm" >
 
     <div>
+
       <mat-form-field appearance="outline" fxFlex>
         <mat-label>Category ID</mat-label>
-        <input  matInput formControlName="categoryId">
-        <mat-error *ngIf="productForm.get('categoryId').touched && productForm.get('categoryId').invalid">
-          <small *ngIf="productForm.get('categoryId').hasError('required')">Requered this field.</small>
-        </mat-error>
+        <mat-select formControlName="categoryId">
+          <mat-option *ngFor="let item of category" [value]="item.id" >{{item.name}}</mat-option>
+        </mat-select>
       </mat-form-field>
+<!--      <mat-form-field appearance="outline" fxFlex>-->
+<!--        <mat-label>Category ID</mat-label>-->
+<!--        <input  matInput formControlName="categoryId">-->
+<!--        <mat-error *ngIf="productForm.get('categoryId').touched && productForm.get('categoryId').invalid">-->
+<!--          <small *ngIf="productForm.get('categoryId').hasError('required')">Requered this field.</small>-->
+<!--        </mat-error>-->
+<!--      </mat-form-field>-->
     </div>
 
   <div>

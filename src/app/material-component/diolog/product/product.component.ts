@@ -5,6 +5,7 @@ import {NgxUiLoaderService} from "ngx-ui-loader";
 import {ProductService} from "../../../service/product.service";
 import {GlobalConstant} from "../../../share/global_constant";
 import {SnackbarService} from "../../../service/snackbar.service";
+import {CategoryService} from "../../../../service/category.service";
 
 @Component({
   selector: 'app-product',
@@ -18,13 +19,15 @@ export class ProductComponent implements OnInit{
    onDeleteProduct=new EventEmitter();
 
   productForm:any= FormGroup;
-responseMessage:any;
+   responseMessage:any;
   dialogAction='Add';
   action='Add';
+  category:any=[];
 
 
   constructor(@Inject(MAT_DIALOG_DATA) public dialogData:any, private formBuilder:FormBuilder,private  ngxService:NgxUiLoaderService,
               private  service:ProductService,private  snackbar:SnackbarService,
+              private  categoryService:CategoryService,
               private ref:MatDialogRef<ProductComponent>) {
   }
   ngOnInit(): void {
@@ -42,7 +45,18 @@ responseMessage:any;
       this.productForm.patchValue(this.dialogData.data)
     }
 
+    this.getCategory();
 
+  }
+
+  getCategory(){
+    this.categoryService.getAll().subscribe({
+      next:(res)=>{
+        this.category=res.data;
+
+        console.log(res.data)
+      }
+    })
   }
 
   handleSubmit(){
@@ -111,8 +125,11 @@ responseMessage:any;
 
     // console.log(data)
 
+
+
     this.service.update(data).subscribe({
       next:(res)=>{
+
 
 
         this.onEditProduct.emit();
