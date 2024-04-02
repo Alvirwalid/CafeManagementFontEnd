@@ -19,7 +19,6 @@ export class DashboardComponent implements AfterViewInit{
    responseMassage:any;
 
   constructor( changeDetectorRef: ChangeDetectorRef, media: MediaMatcher,    private service:DashboardService,private  nguiService:NgxUiLoaderService,private  snackbarService:SnackbarService) {
-
     nguiService.start();
     this.dashboardData()
     this.mdq = media.matchMedia('(max-width: 992px)');

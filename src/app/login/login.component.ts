@@ -9,6 +9,8 @@ import {SnackbarService} from "../service/snackbar.service";
 import {LoginService} from "../service/login.service";
 import {error} from "@angular/compiler-cli/src/transformers/util";
 import {AuthService} from "../service/auth.service";
+import {jwtDecode} from "jwt-decode";
+import {Token} from "@angular/compiler";
 
 @Component({
   selector: 'app-login',
@@ -20,6 +22,9 @@ export class LoginComponent implements OnInit{
   hide=true;
   loginForm:any=FormGroup;
   private isAuthenticated = false;
+  token:any;
+
+
 
   constructor(private formbuilder:FormBuilder,private userService:UserService,
               private  ngxService:NgxUiLoaderService,
@@ -56,9 +61,17 @@ export class LoginComponent implements OnInit{
         this.ngxService.stop();
         this.authService.accessToken=res.data.data['token']
         localStorage.setItem('token',res.data.data['token'])
+
+         this.token = jwtDecode(res.data.data['token']);
         this.authService.authenticated=true;
         this.dialogRef.close();
-        this.router.navigate(['/cafe'])
+
+        if(this.token['role']=='user'){
+          this.router.navigate(['/user'])
+        }else {
+          this.router.navigate(['/cafe'])
+        }
+
         this.snackbarService.openSnakbar(res.message,'');
         this.isAuthenticated = true;
 

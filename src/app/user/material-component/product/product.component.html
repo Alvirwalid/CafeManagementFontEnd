@@ -1,0 +1,35 @@
+<div class="container">
+
+  <mat-card class="header" >
+    <span>Dashboard</span>
+  </mat-card>
+  <table mat-table class="mat-elevation-z6" [dataSource]="dataSource" >
+
+    <tr mat-header-row *matHeaderRowDef="columnsName"></tr>
+    <tr mat-row *matRowDef="let r;columns:columnsName"></tr>
+
+
+    <ng-container matColumnDef="name">
+
+      <th mat-header-cell *matHeaderCellDef>Name</th>
+      <td mat-cell *matCellDef="let element">{{element.name}}</td>
+
+    </ng-container>
+
+    <ng-container matColumnDef="categoryName">
+      <th mat-header-cell *matHeaderCellDef>Category Name</th>
+      <td mat-cell *matCellDef="let element">{{element.categoryName}}</td>
+    </ng-container>
+    <ng-container matColumnDef="description">
+      <th mat-header-cell *matHeaderCellDef>Description</th>
+      <td mat-cell *matCellDef="let element">{{element.description}}</td>
+    </ng-container>
+    <ng-container matColumnDef="price">
+      <th mat-header-cell *matHeaderCellDef>Price</th>
+      <td mat-cell *matCellDef="let element">{{element.price}}</td>
+    </ng-container>
+
+
+  </table>
+
+</div>

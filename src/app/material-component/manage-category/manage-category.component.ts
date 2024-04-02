@@ -23,11 +23,12 @@ export class ManageCategoryComponent implements OnInit{
     private service:CategoryService,private dialog:MatDialog,private ngxService:NgxUiLoaderService,
     private  snackbar:SnackbarService,private route:Router
   ) {
+    this.ngxService.start();
+    this.tableData();
   }
 
   ngOnInit(): void {
-    this.ngxService.start();
-    this.tableData();
+
   }
 
   tableData(){
@@ -44,7 +45,7 @@ export class ManageCategoryComponent implements OnInit{
         if(err.error.message){
           this.responseMessage=err.error.message;
         }else {
-          this.responseMessage=GlobalConstant.error;
+          this.responseMessage=GlobalConstant.genericError;
         }
 
         console.log(this.responseMessage)

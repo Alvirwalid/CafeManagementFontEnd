@@ -1,0 +1,23 @@
+body{
+  padding: 10px;
+
+}
+.mainTitle{
+  width: 100%;
+  padding: 16px;
+}
+.cardContainer{
+display: flex;
+  flex-wrap: wrap;
+  margin-top: 20px;
+
+ .mat-card-item{
+  flex: 1;
+  padding: 8px;
+   text-align: center;
+  }
+  .mat-card-item:not(:last-child) {
+    margin-right:8px; /* Increase bottom margin for all items except the last one */
+  }
+
+}

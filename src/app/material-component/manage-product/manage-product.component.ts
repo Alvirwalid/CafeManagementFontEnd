@@ -8,6 +8,7 @@ import {MatTableDataSource} from "@angular/material/table";
 import {ProductComponent} from "../diolog/product/product.component";
 import {Router} from "@angular/router";
 import {ConfirmationComponent} from "../diolog/confirmation/confirmation.component";
+import {jwtDecode} from "jwt-decode";
 
 @Component({
   selector: 'app-manage-product',
@@ -18,34 +19,39 @@ export class ManageProductComponent implements  OnInit{
   onDeleteEmit=new EventEmitter();
   onStatusEmit=new EventEmitter();
   displayNameColumns:string[]=['name','categoryName','description','price','edit']
+  displayNameColumnsForUser:string[]=['name','categoryName','description','price']
   dataSource:any;
   responseMessage:any;
+  isUser:boolean=false;
+   token:string =localStorage.getItem('token')??'';
 
   constructor(private  service:ProductService,
               private  dialog:MatDialog,
               private  snackbar:SnackbarService,
               private  route:Router,
               private  ngxService:NgxUiLoaderService) {
+
+    this.ngxService.start();
+    this.tableData()  ;
   };
 
   ngOnInit(): void {
-    this.ngxService.start();
-    this.tableData()  ;
+
   }
     tableData(){
 
     this.service.getAllProduct().subscribe({
       next:(res)=>{
          this.ngxService.stop();
-        console.log(res)
+        console.log(res.data[0]['categoryName'])
         this.dataSource=new  MatTableDataSource(res.data);
       },
       error:(err)=>{
-
+        this.ngxService.stop();
         if(err.error.message){
           this.responseMessage=err.error.message;
         }else {
-          this.responseMessage=GlobalConstant.error;
+          this.responseMessage=GlobalConstant.genericError;
         }
         this.snackbar.openSnakbar(this.responseMessage,'');
       }

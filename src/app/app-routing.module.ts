@@ -6,6 +6,10 @@ import {DashboardComponent} from "./dashboard/dashboard.component";
 import {routeGuard} from "./service/route.guard";
 import {ManageCategoryComponent} from "./material-component/manage-category/manage-category.component";
 import {MaterialComponentModule} from "./material-component/material-component.module";
+import {UserDashboardComponent} from "./user/user-dashboard/user-dashboard.component";
+import {MainDashboardComponent} from "./user/material-component/main-dashboard/main-dashboard.component";
+import {CategoryComponent} from "./user/material-component/category/category.component";
+import {ProductComponent} from "./user/material-component/product/product.component";
 
 
 
@@ -69,6 +73,35 @@ const routes: Routes = [
 
     ],
   },
+
+  {
+    path:'user',
+    component:UserDashboardComponent,
+    children:[
+      {
+        path: '',
+        redirectTo: 'dashboard',
+        pathMatch: 'full'
+      },
+      {
+        path: 'category',
+        component:CategoryComponent
+      },
+
+      {
+        path: 'product',
+        component:ProductComponent
+      },
+
+
+      {
+        path: 'dashboard',
+        component:MainDashboardComponent
+      }
+    ]
+
+  },
+
   {
     path:'home',
     component:HomeComponent

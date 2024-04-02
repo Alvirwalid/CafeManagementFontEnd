@@ -28,7 +28,7 @@ export const routeGuard: CanActivateFn = (route:ActivatedRouteSnapshot, state:Ro
   expectedRoleArray= expectedRoleArray?.['expectedRole']
   let token = "........";
   token =localStorage.getItem('token')??"";
-   var tokenPayLoad;
+   var tokenPayLoad:any;
   // console.log('Token : '+token)
 
   try {
@@ -38,7 +38,7 @@ export const routeGuard: CanActivateFn = (route:ActivatedRouteSnapshot, state:Ro
       var expectedRole='';
 
       for(var i=0;i<expectedRoleArray?.['length'];i++){
-        // @ts-ignore
+
         if(expectedRoleArray?.[i]==tokenPayLoad['role']){
 
           expectedRole=expectedRoleArray?.[i];
@@ -46,18 +46,15 @@ export const routeGuard: CanActivateFn = (route:ActivatedRouteSnapshot, state:Ro
         }
       }
 
-      // @ts-ignore
       if(tokenPayLoad['role'] === 'user' || tokenPayLoad['role']==='admin'){
 
-        // @ts-ignore
         if(tokenPayLoad['role'] === 'admin'){
           console.log('admin')
         }else {
           console.log('user')
         }
-        // @ts-ignore
-        if(authService.isAuthenticated() && expectedRole == tokenPayLoad['role']){
 
+        if(authService.isAuthenticated() && expectedRole == tokenPayLoad['role']){
           return true;
         }
 
@@ -81,7 +78,6 @@ export const routeGuard: CanActivateFn = (route:ActivatedRouteSnapshot, state:Ro
       return  false;
     }
 
-    console.log(tokenPayLoad);
   }catch (e){
     localStorage.clear();
     router.navigate(['/'])

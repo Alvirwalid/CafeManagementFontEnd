@@ -22,6 +22,11 @@ import { LoginComponent } from './login/login.component';
 import {tokenInterceptorInterceptor} from "./service/token-interceptor.interceptor";
 import {MatSidenavModule} from "@angular/material/sidenav";
 import {MatTableModule} from "@angular/material/table";
+import { UserDashboardComponent } from './user/user-dashboard/user-dashboard.component';
+import { SideNavComponent } from './user/layouts/side-nav/side-nav.component';
+import { MainDashboardComponent } from './user/material-component/main-dashboard/main-dashboard.component';
+import { CategoryComponent } from './user/material-component/category/category.component';
+import { ProductComponent } from './user/material-component/product/product.component';
 const ngxUiLoaderConfig:NgxUiLoaderConfig={
   text:'Loading...',
   textColor:'#FFFFFFF',
@@ -47,6 +52,11 @@ const ngxUiLoaderConfig:NgxUiLoaderConfig={
     SignupComponent,
     ForgotpasswordComponent,
     LoginComponent,
+    UserDashboardComponent,
+    SideNavComponent,
+    MainDashboardComponent,
+    CategoryComponent,
+    ProductComponent,
 
 
   ],

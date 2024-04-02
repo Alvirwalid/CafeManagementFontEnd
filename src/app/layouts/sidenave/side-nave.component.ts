@@ -19,19 +19,13 @@ export class SideNaveComponent implements OnDestroy{
   userRole:any;
   token:any=localStorage.getItem('token');
   tokenPayload:any;
-
-
   constructor(private changeDetectorRef:ChangeDetectorRef,private  media:MediaMatcher,
               public menuItem:MenuItems) {
 
      this.tokenPayload = jwtDecode(this.token);
      this.userRole= this.tokenPayload?.['role']
-
-    // console.log(this.tokenPayload);
-
-    this.mdq = media.matchMedia("max-width: 992px");
-    this.mediaQueryListener=()=>{
-
+     this.mdq = media.matchMedia("max-width: 992px");
+     this.mediaQueryListener=()=>{
       console.log("Roleeee "+this.userRole)
       changeDetectorRef.detectChanges();
       console.log("Change Side?",this.mdq);

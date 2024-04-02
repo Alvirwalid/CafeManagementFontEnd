@@ -1,0 +1,26 @@
+<body>
+<mat-card class="mainTitle">
+  <b><span>Dashboard</span></b>
+</mat-card>
+
+<div class="cardContainer">
+  <mat-card class="mat-card-item" >
+    <b>Category</b>
+    <h4>{{details?.data['category']??0}}</h4>
+    <button mat-raised-button color="primary">View Details</button>
+  </mat-card>
+
+  <mat-card class="mat-card-item" >
+    <b>Product</b>
+    <h4>{{details?.data['product']??0}}</h4>
+    <button mat-raised-button color="primary">View Details</button>
+  </mat-card>
+
+  <mat-card class="mat-card-item" >
+    <b>Bill</b>
+    <h4>{{details?.data['bill']??0}}</h4>
+    <button mat-raised-button color="primary">View Details</button>
+  </mat-card>
+</div>
+
+</body>
