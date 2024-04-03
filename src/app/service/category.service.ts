@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
-import {environment} from "../environments/environment";
+import {environment} from "../../environments/environment";
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Observable} from "rxjs";
-import {CommonResponseObject} from "../app/model/common_response";
+import {CommonResponseObject} from "../model/common_response";
 import * as http from "http";
+import * as url from "url";
 
 @Injectable({
   providedIn: 'root'
@@ -32,6 +33,9 @@ export class CategoryService {
       {
         headers:new HttpHeaders().set('Content-Type','application/json')
       });
+  }
+  getCategoryByFilter():Observable<CommonResponseObject<any>>{
+    return  this.http.get<CommonResponseObject<any>>(this.url+`/category/all?filterData=true`)
   }
 
 }

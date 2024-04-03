@@ -1,0 +1,58 @@
+<body>
+<div class="mat-elevation-z2">
+  <b><span>Manage Order</span></b>
+  <button mat-raised-button color="primary" [disabled]="validateSubmit()" (click)="submitAction()"><mat-icon>print</mat-icon>Submit & Get Bill</button>
+</div>
+
+
+
+<mat-card class="form">
+  <b><span>Customer Details</span></b>
+  <form [formGroup]="orderForm">
+
+    <mat-form-field fxFlex appearance="outline"  class="row-1">
+      <mat-label>Name</mat-label>
+      <input matInput formControlName="name">
+
+    </mat-form-field>
+
+
+    <mat-form-field fxFlex appearance="outline" class="row-1">
+      <mat-label>Email</mat-label>
+      <input matInput formControlName="email">
+    </mat-form-field>
+
+    <mat-form-field fxFlex appearance="outline" class="row-1">
+      <mat-label>Payment Method</mat-label>
+      <mat-select formControlName="paymentMethod" required>
+
+        <mat-option value="cash">Cash</mat-option>
+        <mat-option value="credit card">Credit Card</mat-option>
+        <mat-option value="debit card">Debit Card</mat-option>
+
+      </mat-select>
+    </mat-form-field>
+
+
+  </form>
+</mat-card>
+<mat-card>
+  <b><span>Select Product:-</span></b>
+ <form [formGroup]="orderForm">
+
+   <mat-form-field>
+     <mat-label>Category</mat-label>
+     <mat-select formControlName="category" required (selectionChange)="getProductByCategory($event.value)">
+       <mat-option *ngFor="let item of categoryList" [value]="item.id">{{item.name}}</mat-option>
+     </mat-select>
+   </mat-form-field>
+
+   <mat-form-field>
+     <mat-label>Product</mat-label>
+     <mat-select formControlName="product" required (selectionChange)="getProductDetails($event.value)">
+       <mat-option *ngFor="let item of productList" [value]="item.id">{{item.name}}</mat-option>
+     </mat-select>
+   </mat-form-field>
+ </form>
+</mat-card>
+</body>

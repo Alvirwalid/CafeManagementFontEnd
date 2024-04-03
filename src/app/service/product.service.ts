@@ -36,7 +36,7 @@ export class ProductService {
   }
 
   getById(id:any):Observable<CommonResponseObject<any>>{
-    return  this.http.get<CommonResponseObject<any>>(this.url+'/products/get-by-id');
+    return  this.http.get<CommonResponseObject<any>>(this.url+`/products/get-by-id?id=${id}`);
   }
 
   getByCategoryId(id:any):Observable<CommonResponseObject<any>>{

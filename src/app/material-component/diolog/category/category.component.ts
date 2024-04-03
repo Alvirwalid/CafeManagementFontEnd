@@ -1,7 +1,7 @@
 import {Component, EventEmitter, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {CategoryService} from "../../../../service/category.service";
+import {CategoryService} from "../../../service/category.service";
 import {SnackbarService} from "../../../service/snackbar.service";
 import {NgxUiLoaderService} from "ngx-ui-loader";
 import {GlobalConstant} from "../../../share/global_constant";

@@ -10,6 +10,7 @@ import {UserDashboardComponent} from "./user/user-dashboard/user-dashboard.compo
 import {MainDashboardComponent} from "./user/material-component/main-dashboard/main-dashboard.component";
 import {CategoryComponent} from "./user/material-component/category/category.component";
 import {ProductComponent} from "./user/material-component/product/product.component";
+import {ManageOrderComponent} from "./material-component/manage-order/manage-order.component";
 
 
 
@@ -91,6 +92,9 @@ const routes: Routes = [
       {
         path: 'product',
         component:ProductComponent
+      },{
+      path: 'order',
+      component:ManageOrderComponent
       },
 
 

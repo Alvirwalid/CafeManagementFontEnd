@@ -15,6 +15,7 @@ import { CategoryComponent } from './diolog/category/category.component';
 import { ManageProductComponent } from './manage-product/manage-product.component';
 import { ProductComponent } from './diolog/product/product.component';
 import {MatTooltip} from "@angular/material/tooltip";
+import { ManageOrderComponent } from './manage-order/manage-order.component';
 
 
 
@@ -27,7 +28,8 @@ import {MatTooltip} from "@angular/material/tooltip";
     CategoryComponent,
     ManageProductComponent,
     ManageProductComponent,
-    ProductComponent
+    ProductComponent,
+    ManageOrderComponent
   ],
     imports: [
         CommonModule,

@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {CategoryService} from "../../../../service/category.service";
+import {CategoryService} from "../../../service/category.service";
 import {NgxUiLoaderService} from "ngx-ui-loader";
 import {MatTableDataSource} from "@angular/material/table";
 import {SnackbarService} from "../../../service/snackbar.service";

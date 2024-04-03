@@ -5,7 +5,7 @@ import {NgxUiLoaderService} from "ngx-ui-loader";
 import {ProductService} from "../../../service/product.service";
 import {GlobalConstant} from "../../../share/global_constant";
 import {SnackbarService} from "../../../service/snackbar.service";
-import {CategoryService} from "../../../../service/category.service";
+import {CategoryService} from "../../../service/category.service";
 
 @Component({
   selector: 'app-product',
