@@ -9,6 +9,7 @@ import {GlobalConstant} from "../../share/global_constant";
 import {CustomMethod} from "../../share/CustomMethod";
 import {load} from "@angular-devkit/build-angular/src/utils/server-rendering/esm-in-memory-loader/loader-hooks";
 import {saveAs} from "file-saver";
+import {MatSelectChange} from "@angular/material/select";
 
 @Component({
   selector: 'app-manage-order',
@@ -18,7 +19,8 @@ import {saveAs} from "file-saver";
 export class ManageOrderComponent implements OnInit{
 
   columnName=['name','category','price','quantity','total','edit'];
-  dataSource:any;
+
+  dataSource: any[] = [];
   orderForm:any=FormGroup;
   categoryList:any;
   productList:any;
@@ -49,16 +51,16 @@ export class ManageOrderComponent implements OnInit{
     });
 
     this.getCategory();
+
   }
 
   getCategory(){
     this.categoryService.getCategoryByFilter().subscribe({
       next:(res)=>{
-
-        console.log( 'Category : '+res)
+        // console.log( 'Category : '+res)
         this.loader.stop();
         this.categoryList = res.data;
-        console.log(res)
+        // console.log(res)
       },
       error:(err)=>{
         this.loader.stop();
@@ -69,10 +71,14 @@ export class ManageOrderComponent implements OnInit{
   }
 
   getProductByCategory(value:any){
-    console.log(`Value ${value}`)
-    this.productService.getByCategoryId(value).subscribe({
+
+
+    console.log(`Value ${value.value.id}`)
+    console.log(`Value ${value.value.name}`)
+
+    this.productService.getByCategoryId(value.value.id).subscribe({
       next:(res)=>{
-        // console.log(res)
+
         this.loader.stop();
         this.productList=res.data;
         this.orderForm.controls['price'].setValue('');
@@ -87,10 +93,9 @@ export class ManageOrderComponent implements OnInit{
     })
   }
 
-  getProductDetails(id:any){
+  getProductDetails(event:any){
 
-    console.log(`ID = ${id}`)
-    this.productService.getById(id).subscribe({
+    this.productService.getById(event.value.id).subscribe({
       next:(res)=>{
         console.log(res)
         this.loader.stop();
@@ -98,6 +103,8 @@ export class ManageOrderComponent implements OnInit{
         this.orderForm.controls['price'].setValue(this.price);
         this.orderForm.controls['quantity'].setValue('1');
         this.orderForm.controls['total'].setValue(this.price*1);
+
+        console.log(`Total by details ${this.orderForm.controls['total'].value}`)
 
       } ,
       error:(err:any)=>{
@@ -109,20 +116,37 @@ export class ManageOrderComponent implements OnInit{
 
   setQuantity(q:any){
     var temp = this.orderForm.controls['quantity'].value;
-    if(temp>0){
 
-      this.orderForm.controls['total'].setValue(this.orderForm.controls['price'].value*this.orderForm.controls['quantity'].value)
+    console.log(`Temp : ${temp}`)
+    if(temp>0){
+      console.log('Grater than 0');
+      var total = this.orderForm.controls['price'].value*this.orderForm.controls['quantity'].value;
+      this.orderForm.controls['total'].setValue(total);
+
+      console.log(`Total : ${total}`)
+
     }else if(temp !=''){
+      console.log('Less than 0')
       this.orderForm.controls['quantity'].setValue('1');
       this.orderForm.controls['total'].setValue(this.orderForm.controls['price'].value*this.orderForm.controls['quantity'].value)
     }
   }
-  validateProductAdd(){
-    if(this.orderForm.controls['total'] ==0 || this.orderForm.controls['total']==null || this.orderForm.controls['quantity']<=0)
-      return true;
-    else return false;
+  validateProductAdd():boolean{
+
+    if(this.orderForm.controls['total'].value ==0 || this.orderForm.controls['quantity'].value<=0){
+      return  true;
+    }else {
+      return  false;
+    }
   }
   validateSubmit(){
+
+    console.log(`Total Amount${this.totalAmount ==0}`)
+    console.log(`Name ${this.orderForm.controls['name'].value==null}`)
+    console.log(`Contact Number ${this.orderForm.controls['contactNumber'].value==null}`)
+    console.log(`Payment Method ${this.orderForm.controls['paymentMethod'].value==null}`)
+
+
     if(this.totalAmount ==0|| this.orderForm.controls['name'].value==null || this.orderForm.controls['email'].value==null ||
       this.orderForm.controls['contactNumber'].value==null ||  this.orderForm.controls['paymentMethod'].value==null){
       return true;
@@ -132,10 +156,41 @@ export class ManageOrderComponent implements OnInit{
 
   add(){
 
-    var formData = this.orderForm.value;
-    var  productName = this.dataSource.find((e:{id:number})=>e.id===formData.product.id)
+    // this.totalAmount=0;
 
-    if(productName === undefined){
+    var formData = this.orderForm.value;
+
+    var productId = formData.product.id;
+    // console.log(`Product ID ${productId}`)
+    const product = this.dataSource.find((element: any) => element.id === productId);
+
+    //
+    // if(this.dataSource.length==0){
+    //   this.totalAmount =this.totalAmount +formData.total;
+    //
+    //
+    //
+    //   this.dataSource.push({
+    //     id:formData.product.id,
+    //     name:formData.product,
+    //     category:formData.category,
+    //     quantity:formData.quantity,
+    //     price:formData.price,
+    //     total:formData.total
+    //   });
+    //
+    //
+    //
+    //
+    //   this.dataSource =[...this.dataSource];
+    //   console.log(this.dataSource)
+    //     this.snackbar.openSnakbar('Product Added','Success')
+    //
+    // }else {
+    //   this.snackbar.openSnakbar('Product Already Exist',GlobalConstant.error)
+    // }
+
+    if(product === undefined){
       this.totalAmount =this.totalAmount +formData.total;
       this.dataSource.push(
         {
@@ -147,8 +202,9 @@ export class ManageOrderComponent implements OnInit{
           total:formData.total
         }
       );
-
       this.dataSource =[...this.dataSource];
+      console.log(this.dataSource)
+      // console.log(this.dataSource.length)
       this.snackbar.openSnakbar('Product Added','Success')
     }else {
       this.snackbar.openSnakbar('Product Already Exist',GlobalConstant.error)
@@ -157,9 +213,10 @@ export class ManageOrderComponent implements OnInit{
 
   }
 
-  handleDeleteAction(value:any,element:any){
+  handleDeleteAction(index:any,element:any){
+
     this.totalAmount=this.totalAmount-element.total;
-    this.dataSource.splice(value,1);
+    this.dataSource.splice(index,1);
     this.dataSource=[...this.dataSource];
   }
   submitAction(){
