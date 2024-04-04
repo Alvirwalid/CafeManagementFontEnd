@@ -140,13 +140,6 @@ export class ManageOrderComponent implements OnInit{
     }
   }
   validateSubmit(){
-
-    console.log(`Total Amount${this.totalAmount ==0}`)
-    console.log(`Name ${this.orderForm.controls['name'].value==null}`)
-    console.log(`Contact Number ${this.orderForm.controls['contactNumber'].value==null}`)
-    console.log(`Payment Method ${this.orderForm.controls['paymentMethod'].value==null}`)
-
-
     if(this.totalAmount ==0|| this.orderForm.controls['name'].value==null || this.orderForm.controls['email'].value==null ||
       this.orderForm.controls['contactNumber'].value==null ||  this.orderForm.controls['paymentMethod'].value==null){
       return true;
@@ -220,7 +213,7 @@ export class ManageOrderComponent implements OnInit{
     this.dataSource=[...this.dataSource];
   }
   submitAction(){
-
+    // this.loader.start();
     console.log('Submit Action')
     var formData= this.orderForm.value;
    var data={
@@ -229,20 +222,22 @@ export class ManageOrderComponent implements OnInit{
      contactNumber: formData.contactNumber,
      paymentMethod:formData.paymentMethod,
      totalAmount:this.totalAmount.toString(),
-     productDetails:JSON.stringify(this.dataSource)
+     // productDetails:JSON.stringify(this.dataSource)
    }
    console.log(data)
+   //
+   this.billService.generateReport(data).subscribe({
+     next:(res:any)=>{
+       this.loader.stop();
+       // console.log(res)
+       // this.downloadFile(res.data.uuid)
+     },
+     error:(err)=>{
+       this.loader.stop();
+       this.responseMessage=CustomMethod.errorResponse(err);this.snackbar.openSnakbar(this.responseMessage,'')}
 
-   // this.loader.start();
-   // this.billService.generateReport(data).subscribe({
-   //   next:(res)=>{
-   //     console.log(res)
-   //     // this.downloadFile(res.data.uuid)
-   //   },
-   //   error:(err)=>{this.responseMessage=CustomMethod.errorResponse(err);this.snackbar.openSnakbar(this.responseMessage,'')}
-   //
-   //
-   // })
+
+   })
 
   }
 

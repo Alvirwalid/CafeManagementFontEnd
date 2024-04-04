@@ -19,6 +19,9 @@ export class BillService {
   headers={headers:new HttpHeaders().set('Content-Type','application/json')}
 
   generateReport(data:any):Observable<CommonResponseObject<any>>{
+
+    console.log(`Dataaaaaaaaaaaaaaaaaaaaaaa :`)
+    console.log( data)
     return this.http.post<CommonResponseObject<any>>(url+'/bill/generateReport',data,this.headers)
   }
 
