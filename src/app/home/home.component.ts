@@ -1,25 +1,26 @@
-import {Component, Inject, Injectable} from '@angular/core';
+import {Component, Inject, Injectable, OnInit} from '@angular/core';
 import {MatDialog, MatDialogConfig} from "@angular/material/dialog";
 import {SignupComponent} from "../signup/signup.component";
 import {ForgotpasswordComponent} from "../forgotpassword/forgotpassword.component";
 import {LoginComponent} from "../login/login.component";
-import {LoginService} from "../service/login.service";
-import {ActivatedRouteSnapshot, Route, Router, RouterStateSnapshot} from "@angular/router";
 import {AuthService} from "../service/auth.service";
+import console from "console";
+import {jwtDecode} from "jwt-decode";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })
-export class HomeComponent {
+export class HomeComponent  implements OnInit{
 
 
   token='';
 
   private loginService=Inject(LoginComponent)
   // private  authService=Inject(AuthService);
-  constructor(private  dialog:MatDialog,private  s:AuthService) {
+  constructor(private  dialog:MatDialog,private  auth:AuthService,private  route:Router) {
   }
 
   handleSignUpAction(){
@@ -43,11 +44,35 @@ export class HomeComponent {
     this.token=localStorage.getItem('token')??'No token found'
   }
   logout(): void {
-    this.s.signOut().subscribe({
+    this.auth.signOut().subscribe({
       next:(res)=>{
         console.log(res)
       }
     });
+  }
+
+  ngOnInit(): void {
+    if(this.auth.isAuthenticated()){
+      var token= localStorage.getItem('token');
+
+      var tokenPayLoad = jwtDecode(token??'');
+
+
+      // @ts-ignore
+      if(tokenPayLoad['role']=='user'){
+
+        this.route.navigate(['/user'])
+      }else {
+        this.route.navigate(['/cafe'])
+      }
+
+
+
+    }
+
+
+
+
   }
 
 

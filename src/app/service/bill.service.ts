@@ -18,22 +18,28 @@ export class BillService {
 
   headers={headers:new HttpHeaders().set('Content-Type','application/json')}
 
-  generateReport(data:any):Observable<CommonResponseObject<any>>{
+  // generateReport(data:any):Observable<CommonResponseObject<any>>{
+  //
+  //   console.log(`Dataaaaaaaaaaaaaaaaaaaaaaa :`)
+  //   console.log( data)
+  //   return this.http.post<CommonResponseObject<any>>(url+'/bill/generateReport',data,this.headers)
+  // }
 
-    console.log(`Dataaaaaaaaaaaaaaaaaaaaaaa :`)
-    console.log( data)
-    return this.http.post<CommonResponseObject<any>>(url+'/bill/generateReport',data,this.headers)
+  generateReport(data:any):Observable<CommonResponseObject<any>>{
+    return this.http.post<CommonResponseObject<any>>(this.url+'/bill/generateReport',data,{
+      headers:new HttpHeaders().set('Content-Type','application/json')
+    })
   }
 
   getAllBills():Observable<CommonResponseObject<any>>{
-    return  this.http.get<CommonResponseObject<any>>(url+'/bill/all');
+    return  this.http.get<CommonResponseObject<any>>(this.url+'/bill/all');
   }
   getPdf(data:any):Observable<any>{
-    return this.http.post<any>(url+'/bill/getPdf',data,this.headers)
+    return this.http.post<any>(this.url+'/bill/getPdf',data,this.headers)
   }
 
   deleteBill(id:any):Observable<CommonResponseObject<any>>{
-    return  this.http.delete<CommonResponseObject<any>>(url+`/bill/delete/${id}`,this.headers)
+    return  this.http.delete<CommonResponseObject<any>>(this.url+`/bill/delete/${id}`,this.headers)
   }
 
 }

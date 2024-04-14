@@ -12,6 +12,7 @@ const MENUITEMS =[
   {state:'category',name:'Manage Categories',type:'link',icon:'category',role:'admin'},
   {state:'product',name:'Manage Products',type:'link',icon:'inventory_2',role:'admin'},
   {state:'order',name:'Manage Order',type:'link',icon:'shopping_cart',role:''},
+  {state:'bill',name:'View Bill',type:'link',icon:'backup_table',role:''},
 ]
 
 @Injectable()

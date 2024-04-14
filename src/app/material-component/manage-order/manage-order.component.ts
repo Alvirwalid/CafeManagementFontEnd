@@ -217,23 +217,35 @@ export class ManageOrderComponent implements OnInit{
     console.log('Submit Action')
     var formData= this.orderForm.value;
    var data={
-     name:formData.name,
-     email:formData.email,
-     contactNumber: formData.contactNumber,
-     paymentMethod:formData.paymentMethod,
-     totalAmount:this.totalAmount.toString(),
-     // productDetails:JSON.stringify(this.dataSource)
+     "name":formData.name,
+     "email":formData.email,
+     "contactNumber": formData.contactNumber,
+     "paymentMethod":formData.paymentMethod,
+     "totalAmount":this.totalAmount.toString(),
+     productDetails:JSON.stringify(this.dataSource).toString()
    }
+
+    // var data =
+    //   {
+    //     "contactNumber": "1234567890",
+    //     "email": "test@gmail.com",
+    //     "name": "test",
+    //     "paymentMethod": "Cash",
+    //     "productDetails": "[{\"id\":18,\"name\":\"Doppio Coffee\",\"category\":\"Coffeeeeeee\",\"quantity\":\"1\",\"price\":120,\"total\":120},{\"id\":5,\"name\":\"Chocolate Frosted Doughnut\",\"category\":\"Doughnut\",\"quantity\":\"1\",\"price\":159,\"total\":159},{\"id\":18,\"name\":\"Doppio Coffee\",\"category\":\"Coffee\",\"quantity\":\"1\",\"price\":120,\"total\":120},{\"id\":5,\"name\":\"Chocolate Frosted Doughnut\",\"category\":\"Doughnut\",\"quantity\":\"1\",\"price\":159,\"total\":159}]","totalAmount": "279"}
+    //
+
    console.log(data)
    //
    this.billService.generateReport(data).subscribe({
      next:(res:any)=>{
        this.loader.stop();
-       // console.log(res)
+       console.log(res)
        // this.downloadFile(res.data.uuid)
      },
      error:(err)=>{
        this.loader.stop();
+      this.responseMessage = CustomMethod.errorResponse(err);
+
        this.responseMessage=CustomMethod.errorResponse(err);this.snackbar.openSnakbar(this.responseMessage,'')}
 
 

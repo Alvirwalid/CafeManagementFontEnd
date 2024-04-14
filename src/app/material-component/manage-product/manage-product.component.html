@@ -8,15 +8,12 @@
 </mat-card>
 <hr>
 
-<div class="filter">
 
+<div class="responsive-table">
   <mat-form-field appearance="outline" fxFlex>
     <mat-label>Filter</mat-label>
     <input matInput (keyup)="applyFilter($event)" #input>
   </mat-form-field>
-</div>
-
-<div class="responsive-table">
 
   <table mat-table [dataSource]="dataSource" class="mat-elevation-z6">
     <tr  mat-header-row *matHeaderRowDef="displayNameColumns;sticky:true"></tr>

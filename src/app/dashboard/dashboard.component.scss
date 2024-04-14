@@ -1,64 +1,23 @@
-@use '@angular/material' as mat;
-
-
-.card {
-  @include mat.elevation-transition();
-  @include mat.elevation(5);
-  //&:active {
-  //  @include mat.elevation(20);
-  //}
-}
-
 body{
   padding: 10px;
-  height: 100vh;
-  //margin: 16px;
 
-}
-* {
-  box-sizing: border-box;
-}
-
-
-.row{
-  display: flex;
 }
 .mainTitle{
   width: 100%;
   padding: 16px;
 }
-.card-container {
+.cardContainer{
   display: flex;
   flex-wrap: wrap;
+  margin-top: 20px;
 
-  .card {
+  .mat-card-item{
     flex: 1;
-    background-color: #f0f0f0;
-
     padding: 8px;
     text-align: center;
-
-    .btn{
-      margin-left: auto;
-      margin-right: auto;
-      position: absolute;
-      bottom: 8px;
-      right: 20px;
-      left: 20px;
-    }
   }
-  .card-item:not(:last-child) {
+  .mat-card-item:not(:last-child) {
     margin-right:8px; /* Increase bottom margin for all items except the last one */
   }
-}
-
-@media (min-width:300px) {
-  .card{
-    width: 50%;
-  }
 
 }
-
-
-
-

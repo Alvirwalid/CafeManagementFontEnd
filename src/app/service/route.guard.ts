@@ -1,10 +1,9 @@
 import {ActivatedRouteSnapshot, CanActivateFn, RouterStateSnapshot,} from '@angular/router';
 import { inject } from '@angular/core';
 import { CanActivate, CanActivateChild, CanDeactivate, CanLoad, Router } from '@angular/router';
-import {LoginComponent} from "../login/login.component";
+
 import {AuthService} from "./auth.service";
 import {jwtDecode} from 'jwt-decode';
-import {Token} from "@angular/compiler";
 import {SnackbarService} from "./snackbar.service";
 import {GlobalConstant} from "../share/global_constant";
 
@@ -13,31 +12,31 @@ import {GlobalConstant} from "../share/global_constant";
 
 export const routeGuard: CanActivateFn = (route:ActivatedRouteSnapshot, state:RouterStateSnapshot):boolean => {
 
-  console.log('Router Guard')
+  // console.log('Router Guard')
 
 
 
   const  router=inject(Router);
   const  authService=inject(AuthService);
-
-
   const  snackbarService=inject(SnackbarService);
-  // console.log(authService.isAuthenticated())
-
   let  expectedRoleArray = route.routeConfig?.data
+  let token: string;
+  var tokenPayLoad:any;
+
+
   expectedRoleArray= expectedRoleArray?.['expectedRole']
-  let token = "........";
   token =localStorage.getItem('token')??"";
-   var tokenPayLoad:any;
-  // console.log('Token : '+token)
+
 
   try {
 
     if(token){
-      tokenPayLoad = jwtDecode(token);
-      var expectedRole='';
 
-      for(var i=0;i<expectedRoleArray?.['length'];i++){
+      console.log('token is true')
+      tokenPayLoad = jwtDecode(token);
+      let expectedRole = '';
+
+      for(let i=0; i<expectedRoleArray?.['length']; i++){
 
         if(expectedRoleArray?.[i]==tokenPayLoad['role']){
 
@@ -48,15 +47,24 @@ export const routeGuard: CanActivateFn = (route:ActivatedRouteSnapshot, state:Ro
 
       if(tokenPayLoad['role'] === 'user' || tokenPayLoad['role']==='admin'){
 
-        if(tokenPayLoad['role'] === 'admin'){
-          console.log('admin')
-        }else {
-          console.log('user')
-        }
 
         if(authService.isAuthenticated() && expectedRole == tokenPayLoad['role']){
+
+
+
+          // if(expectedRole=='user'){
+          //
+          //   router.navigate(['/user/'])
+          //
+          // }else {
+          //   router.navigate(['/cafe/'])
+          // }
+
+
           return true;
         }
+
+
 
         snackbarService.openSnakbar(GlobalConstant.unautorized,GlobalConstant.error)
         router.navigate(['/'])
@@ -71,8 +79,13 @@ export const routeGuard: CanActivateFn = (route:ActivatedRouteSnapshot, state:Ro
       }
 
 
-    }else{
+    }
+
+
+
+    else{
       snackbarService.openSnakbar(GlobalConstant.unautorized,GlobalConstant.error)
+
       localStorage.clear()
       router.navigate(['/'])
       return  false;

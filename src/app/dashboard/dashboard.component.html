@@ -1,32 +1,30 @@
+
+
+
 <body>
 <mat-card class="mainTitle">
   <b><span>Dashboard</span></b>
 </mat-card>
-<br>
 
+<div class="cardContainer">
 
-<div class="card-container">
-  <mat-card class="card" [class.mat-elevation-z8]="true" >
-    <h1 class="title">Total Category</h1>
-    <h2 class="title">{{data?.category}}</h2>
-    <button mat-raised-button class="btn" color="primary">View Category</button>
+  <mat-card class="mat-card-item" >
+    <b>Category</b>
+    <h4>{{data?.category??0}}</h4>
+    <button mat-raised-button color="primary">View Details</button>
   </mat-card>
-  <mat-card class="card">
-    <div >
-      <h1 class="title">Total Product</h1>
-      <h2 class="title">{{data?.product}}</h2>
-      <button mat-raised-button class="btn" color="primary">View Product</button>
-    </div>
+
+  <mat-card class="mat-card-item" >
+    <b>Product</b>
+    <h4>{{data?.product??0}}</h4>
+    <button mat-raised-button color="primary">View Details</button>
   </mat-card>
-  <mat-card class="card">
-    <div >
-      <h1 class="title">Total Bill</h1>
-      <h2 class="title">{{data?.bill}}</h2>
-      <button mat-raised-button class="btn" color="primary">View Bill</button>
-    </div>
+
+  <mat-card class="mat-card-item" >
+    <b>Bill</b>
+    <h4>{{data?.bill??0}}</h4>
+    <button mat-raised-button color="primary">View Details</button>
   </mat-card>
-  <!-- Add more cards here -->
 </div>
-
 
 </body>

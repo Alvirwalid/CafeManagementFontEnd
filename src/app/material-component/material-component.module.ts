@@ -16,6 +16,8 @@ import { ManageProductComponent } from './manage-product/manage-product.componen
 import { ProductComponent } from './diolog/product/product.component';
 import {MatTooltip} from "@angular/material/tooltip";
 import { ManageOrderComponent } from './manage-order/manage-order.component';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { BillViewComponent } from './bill-view/bill-view.component';
 
 
 
@@ -29,7 +31,9 @@ import { ManageOrderComponent } from './manage-order/manage-order.component';
     ManageProductComponent,
     ManageProductComponent,
     ProductComponent,
-    ManageOrderComponent
+    ManageOrderComponent,
+    PageNotFoundComponent,
+    BillViewComponent
   ],
     imports: [
         CommonModule,
