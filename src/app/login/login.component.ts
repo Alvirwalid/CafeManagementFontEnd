@@ -72,18 +72,20 @@ export class LoginComponent implements OnInit{
           this.router.navigate(['/cafe'])
         }
 
+
+
         this.snackbarService.openSnakbar(res.message,'');
         this.isAuthenticated = true;
 
       },
 
       error:(error:any)=>{
-        console.log('error')
+        console.log(error)
         this.ngxService.stop();
         this.isAuthenticated = false;
         this.authService.authenticated=false;
 
-        this.snackbarService.openSnakbar(error.message,'');
+        this.snackbarService.openSnakbar(error.error.message,'');
       }
     })
 

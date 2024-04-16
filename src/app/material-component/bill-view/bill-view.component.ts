@@ -64,15 +64,6 @@ export class BillViewComponent {
 
   downloadReportAction(value:any){
     this.loader.start();
-    // var data={
-    //   name:value.name,
-    //   email:value.email,
-    //   uuid:value.uuid,
-    //   contactNumber:value.contactNumber,
-    //   paymentMethod:value.paymentMethod,
-    //   totalAmount: value.total.toString(),
-    //   productDetails: JSON.stringify(value.productDetails).toString()
-    // }
     var data={
       "name":value.name,
       "email":value.email,
@@ -80,28 +71,32 @@ export class BillViewComponent {
       "contactNumber": value.contactNumber,
       "paymentMethod":value.paymentMethod,
       "totalAmount":value.total.toString(),
-      "productDetails":JSON.stringify(value.productDetails).toString()
+      "productDetails":value.productDetails.toString()
     }
 
     this.downloadFile(value.uuid,data)
   }
   downloadFile(_fileName:string,data:any){
 
+    console.log(data)
+    console.log(_fileName)
+
     this.service.getPdf(data).subscribe({
 
       next:(res)=>{
 
-        console.log(res)
         this.loader.stop();
         // saveAs(res,_fileName+'.pdf');
+        console.log(res)
+        this.snackBar.openSnakbar(res.message,'')
 
-        // console.log(res)
+        console.log(res)
       },
       error:(err)=>{
         console.log('Erorrrrrrrrrrrr')
         this.loader.stop();
-        // this.responseMessage=CustomMethod.errorResponse(err)
-        // this.snackBar.openSnakbar(this.responseMessage,'')
+        this.responseMessage=CustomMethod.errorResponse(err)
+        this.snackBar.openSnakbar(this.responseMessage,'')
       }
     })
   }
