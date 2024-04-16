@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, EventEmitter, OnInit} from '@angular/core';
 import {CategoryService} from "../../service/category.service";
 import {MatDialog, MatDialogConfig} from "@angular/material/dialog";
 import {NgxUiLoaderService} from "ngx-ui-loader";
@@ -8,6 +8,8 @@ import {MatTableDataSource} from "@angular/material/table";
 import {CommonResponseObject} from "../../model/common_response";
 import {GlobalConstant} from "../../share/global_constant";
 import {CategoryComponent} from "../diolog/category/category.component";
+import {CustomMethod} from "../../share/CustomMethod";
+import {ConfirmationComponent} from "../diolog/confirmation/confirmation.component";
 
 @Component({
   selector: 'app-manage-category',
@@ -15,6 +17,9 @@ import {CategoryComponent} from "../diolog/category/category.component";
   styleUrl: './manage-category.component.scss'
 })
 export class ManageCategoryComponent implements OnInit{
+
+
+  onDeleteEmit=new EventEmitter();
 
   displayedColumns:string[]=['name','edit'];
   dataSource:any;
@@ -93,6 +98,48 @@ export class ManageCategoryComponent implements OnInit{
     ref.componentInstance.onEditCategory.subscribe((res)=>{
       this.tableData();
     })
+  }
+  handleDelete(id:any){
+
+    const  config =new MatDialogConfig();
+
+    config.width='450px';
+    config.data={
+      message:'Delete',
+      confirmation:true
+    }
+
+    const  ref = this.dialog.open(ConfirmationComponent,config);
+
+
+    ref.componentInstance.onEmitStatusChange.subscribe((res)=>{
+
+
+      this.ngxService.start();
+      this.service.deleteCategory(id).subscribe({
+        next:(res)=>{
+          this.onDeleteEmit.emit();
+          this.ngxService.stop();
+          this.responseMessage=res.message;
+          this.snackbar.openSnakbar(this.responseMessage,'')
+        },
+        error:(err)=>{
+          this.ngxService.stop();
+
+          console.log(err);
+          this.responseMessage = CustomMethod.errorResponse(err);
+          this.snackbar.openSnakbar(this.responseMessage,'')
+        }
+      })
+      ref.close();
+    })
+
+
+
+    this.onDeleteEmit.subscribe((res)=>{
+      this.tableData();
+    })
+
   }
 
   applyFilter(event:Event){

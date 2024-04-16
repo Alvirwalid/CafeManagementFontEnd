@@ -38,4 +38,8 @@ export class CategoryService {
     return  this.http.get<CommonResponseObject<any>>(this.url+`/category/all?filterData=true`)
   }
 
+  deleteCategory(id:any):Observable<CommonResponseObject<any>>{
+    return this.http.delete<CommonResponseObject<any>>(this.url+`/category/delete/${id}`);
+  }
+
 }

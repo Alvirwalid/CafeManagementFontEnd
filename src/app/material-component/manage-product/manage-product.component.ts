@@ -108,7 +108,10 @@ export class ManageProductComponent implements  OnInit{
       }
 
       const  ref = this.dialog.open(ConfirmationComponent,config);
+
+
       ref.componentInstance.onEmitStatusChange.subscribe((res)=>{
+
         this.ngxService.start();
         this.service.deleteById(element.id).subscribe({
           next:(res)=>{
@@ -129,6 +132,7 @@ export class ManageProductComponent implements  OnInit{
             this.snackbar.openSnakbar(this.responseMessage,'');
           }
         })
+
         ref.close();
       });
 

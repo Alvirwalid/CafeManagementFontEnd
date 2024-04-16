@@ -41,7 +41,6 @@ const ngxUiLoaderConfig:NgxUiLoaderConfig={
 
 @NgModule({
   declarations: [
-
     AppComponent,
     FullComponent,
     HeaderComponent,
@@ -57,8 +56,6 @@ const ngxUiLoaderConfig:NgxUiLoaderConfig={
     MainDashboardComponent,
     CategoryComponent,
     ProductComponent,
-
-
   ],
   imports: [
     BrowserModule,
